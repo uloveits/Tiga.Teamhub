@@ -1,7 +1,7 @@
 /*
  * @Author: wangxian
  * @Date: 2022-08-18 11:44:12
- * @LastEditTime: 2022-08-18 14:00:43
+ * @LastEditTime: 2022-08-18 17:08:07
  */
 import {
   ExceptionFilter,
@@ -29,9 +29,10 @@ export class HttpExceptionFilter implements ExceptionFilter {
 
     response.status(status).json({
       code: status,
-      message: (exception.getResponse() as any).errmsg
-        ? (exception.getResponse() as any).errmsg
-        : '服务器内部错误',
+      message:
+        (exception.getResponse() as any).errmsg ||
+        (exception.getResponse() as any).message ||
+        '服务器内部错误',
     });
   }
 }

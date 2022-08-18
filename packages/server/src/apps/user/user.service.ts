@@ -1,7 +1,7 @@
 /*
  * @Author: wangxian
  * @Date: 2022-08-18 10:10:48
- * @LastEditTime: 2022-08-18 14:02:08
+ * @LastEditTime: 2022-08-18 17:21:13
  */
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -10,7 +10,6 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 import { encryptPassword, makeSalt } from '../../utils/cryptogram';
-import { HttpExceptionFilter } from '../../filter/http-exception.filter';
 import { UserException } from 'src/filter/user-exception.filter';
 
 @Injectable()
@@ -43,8 +42,8 @@ export class UserService {
     return `This action returns all user`;
   }
 
-  public getUserById(id: number) {
-    return `This action returns a #${id} user`;
+  public getUserById(id: number): Promise<User> {
+    return this.repository.findOneBy({ id });
   }
 
   public getUserByAccount(account: string): Promise<User> {
