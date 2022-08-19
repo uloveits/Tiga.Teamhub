@@ -1,7 +1,7 @@
 /*
  * @Author: wangxian
  * @Date: 2022-08-18 13:49:48
- * @LastEditTime: 2022-08-18 13:50:24
+ * @LastEditTime: 2022-08-19 10:00:34
  */
 import {
   CallHandler,
@@ -16,7 +16,7 @@ export class TransformInterceptor implements NestInterceptor {
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
     return next.handle().pipe(
       map((data) => ({
-        code: 200,
+        successed: true,
         data,
         message: 'success',
       })),

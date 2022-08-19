@@ -1,0 +1,46 @@
+# # 定义一些变量, 下面各阶段会使用
+variables:
+  # gitlab复制目录
+  gitlab_path: /home/gitlab-runner/builds/C_PHvaDj/0/ronds/org/Happy.Points.Client
+  # client目录
+  test_client_path: /web/HappyPoints/Client
+  # 打包目录
+  build_path: /web/HappyPoints/source
+
+stages:
+  - build
+  - backup
+  - deploy
+
+build:
+  stage: build
+  tags:
+    - phm-dev
+  script:
+    - rm -rf $build_path/src/*
+    - rm -rf $build_path/.eslintcache
+    - cp -rf $gitlab_path/. $build_path
+    - cd $build_path
+    - yarnpkg install
+    - CI=false yarnpkg run build
+  only:
+    - master
+
+backup:
+  stage: backup
+  tags:
+    - phm-dev
+  script:
+    - rm -rf $test_client_path/*
+    - cp -rf $build_path/build/* $test_client_path
+  only:
+    - master
+
+deploy:
+  stage: deploy
+  tags:
+    - phm-dev
+  script:
+    - systemctl restart nginx
+  only:
+    - master

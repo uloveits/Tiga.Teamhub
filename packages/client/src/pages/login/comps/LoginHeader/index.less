@@ -1,0 +1,36 @@
+@app_header_height: 60px;
+@pro-header-hover-bg: rgba(0, 0, 0, 0.25);
+@header-text-color: reba(255, 255, 255, 0.9);
+@app-menu-width: 200px;
+@header-name-color: #40a9ff;
+
+.login-header {
+  height: @app_header_height;
+  line-height: @app_header_height;
+  padding: 0 !important;
+  background-color: rgba(0, 0, 0, 0.1) !important;
+
+  .left {
+    float: left;
+    text-align: center;
+  }
+
+  .logo {
+    width: 300px;
+
+    img {
+      display: inline-block;
+      vertical-align: middle;
+      width: 40px;
+    }
+
+    h2 {
+      color: @header-name-color;
+      display: inline-block;
+      vertical-align: middle;
+      font-size: 20px;
+      margin: 0 0 0 12px;
+      font-weight: 600;
+    }
+  }
+}

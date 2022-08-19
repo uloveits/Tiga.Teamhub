@@ -1,0 +1,69 @@
+{
+    // 使用 IntelliSense 了解相关属性。 
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "nodemon",
+            // "runtimeExecutable": "nodemon",
+            // "program": "${workspaceRoot}/server/node_modules/nodemon/bin/nodemon.js",
+            "restart": true,
+            "console": "integratedTerminal",
+            "runtimeArgs": [
+                "--inspect",
+                "--watch \"src/**/*\"",
+                "-e ts",
+                "--exec \"node\"",
+                "-r",
+                "ts-node/register",
+                "ts-node/register \"./src/App.ts\""
+            ],
+            "cwd": "${workspaceRoot}/server",
+            "internalConsoleOptions": "neverOpen",
+            "skipFiles": [
+                "<node_internals>/**"
+            ]
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "启动Web",
+            "preLaunchTask": "start",
+            "port": 9222,
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceFolder}/client/src",
+            "sourceMapPathOverrides": {
+                "webpack:///src/*": "${webRoot}/*"
+            }
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "启动server",
+            // "program": "${workspaceRoot}/server/node_modules/nodemon/bin/nodemon.js",
+            "args": [
+                "${workspaceRoot}/server/src/App.ts" // 入口文件
+            ],
+            "runtimeArgs": [
+                "--nolazy",
+                "-r",
+                "ts-node/register"
+            ],
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "restart": true,
+            "sourceMaps": true,
+            "cwd": "${workspaceRoot}/server",
+            "protocol": "inspector",
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "sourceMapPathOverrides": {
+                "webpack:///src/*": "${webRoot}/*"
+            }
+        }
+    ]
+}

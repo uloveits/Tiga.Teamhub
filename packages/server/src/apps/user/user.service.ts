@@ -1,7 +1,7 @@
 /*
  * @Author: wangxian
  * @Date: 2022-08-18 10:10:48
- * @LastEditTime: 2022-08-18 17:21:13
+ * @LastEditTime: 2022-08-18 18:59:13
  */
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -22,18 +22,18 @@ export class UserService {
     const salt = makeSalt();
     // 加密密码
     const hashPwd = encryptPassword('Rz123456*', salt);
-    let user: User = new User();
 
-    user = await this.getUserByAccount(body.account);
-    if (user) {
-      console.log('用户已存在');
+    const userResult = await this.getUserByAccount(body.account);
+    if (userResult) {
       throw new UserException('用户已存在');
     } else {
+      const user: User = new User();
       user.account = body.account;
       user.username = body.username;
+      user.phone = body.phone;
       user.password = hashPwd;
       user.password_salt = salt;
-      user.phone = body.phone;
+
       return this.repository.save(user);
     }
   }

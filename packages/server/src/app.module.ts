@@ -10,6 +10,7 @@ import { TypeOrmConfigService } from './shared/typeorm/typeorm.service';
 import { UserModule } from './apps/user/user.module';
 import { AuthModule } from './apps/auth/auth.module';
 import { UserController } from './apps/user/user.controller';
+import { ProjectModule } from './apps/project/project.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { UserController } from './apps/user/user.controller';
     TypeOrmModule.forRootAsync({ useClass: TypeOrmConfigService }),
     UserModule,
     AuthModule,
+    ProjectModule,
   ],
   controllers: [UserController],
   providers: [],

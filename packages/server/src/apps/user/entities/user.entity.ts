@@ -1,7 +1,7 @@
 /*
  * @Author: wangxian
  * @Date: 2022-08-18 10:10:48
- * @LastEditTime: 2022-08-18 10:40:57
+ * @LastEditTime: 2022-08-18 18:52:33
  */
 import {
   Entity,
@@ -11,7 +11,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity()
+@Entity('user', { schema: 'public' })
 export class User {
   @PrimaryGeneratedColumn()
   public id!: number;
@@ -38,9 +38,9 @@ export class User {
    * Create and Update Date Columns
    */
 
-  @CreateDateColumn({ type: 'timestamp', name: 'createTime' })
-  public createTime!: Date;
+  @CreateDateColumn({ type: 'timestamp', name: 'create_time' })
+  public create_time!: Date;
 
-  @UpdateDateColumn({ type: 'timestamp', name: 'updatedTime' })
-  public updatedTime!: Date;
+  @UpdateDateColumn({ type: 'timestamp', name: 'update_time' })
+  public update_time!: Date;
 }

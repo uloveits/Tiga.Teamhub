@@ -1,7 +1,7 @@
 /*
  * @Author: wangxian
  * @Date: 2022-08-18 10:10:48
- * @LastEditTime: 2022-08-18 10:59:19
+ * @LastEditTime: 2022-08-18 18:49:57
  */
 import { IsNotEmpty, IsString } from 'class-validator';
 
@@ -14,9 +14,7 @@ export class CreateUserDto {
   @IsNotEmpty()
   public username: string;
 
-  public password: string;
-
+  @IsString()
+  @IsNotEmpty()
   public phone: string;
-
-  public isDeleted: boolean;
 }

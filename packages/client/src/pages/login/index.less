@@ -1,0 +1,24 @@
+@LoginFormWidth: 401px;
+@LoginFormHeight: 434px;
+
+.app-login {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: url(../../public/img/backgroundx.png) no-repeat;
+  background-size: 100% 100%;
+  color: #fff;
+
+  opacity: 1;
+
+  .components-form-normal-login {
+    text-align: center;
+    width: @LoginFormWidth;
+    height: @LoginFormHeight;
+    font-size: 18px;
+    color: #fff;
+    margin-left: calc((100vw - @LoginFormWidth) * 0.9);
+    margin-top: calc((100vh - @LoginFormHeight) * 0.4);
+    background-color: #335e88;
+  }
+}

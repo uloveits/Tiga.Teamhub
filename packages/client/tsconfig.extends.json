@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@dmp/*": ["./src/comps/dmp/*"]
+    }
+  },
+  "exclude": ["node_modules", "build"]
+}

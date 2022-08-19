@@ -2,7 +2,7 @@ import { UserException } from 'src/filter/user-exception.filter';
 /*
  * @Author: wangxian
  * @Date: 2022-08-18 15:55:23
- * @LastEditTime: 2022-08-18 17:01:37
+ * @LastEditTime: 2022-08-19 10:20:28
  */
 import { Inject, Injectable } from '@nestjs/common';
 import { UserService } from '../user/user.service';
@@ -39,7 +39,7 @@ export class AuthService {
     const payload = {
       account: user.account,
       username: user.username,
-      sub: user.id,
+      id: user.id,
     };
     console.log(
       'JWT验证 - Step 3: 处理 jwt 签证',
@@ -47,7 +47,7 @@ export class AuthService {
     );
     try {
       const token = this.jwtService.sign(payload);
-      return token;
+      return { ...payload, token };
     } catch (error) {
       throw new UserException('账号密码错误');
     }

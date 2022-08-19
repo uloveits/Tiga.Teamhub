@@ -1,6 +1,10 @@
 {
   "name": "root",
   "private": true,
+  "scripts": {
+    "start:client": "cd ./packages/client && yarn start",
+    "start:server": "cd ./packages/server && yarn start:dev"
+  },
   "devDependencies": {
     "lerna": "^5.0.0"
   }

@@ -1,0 +1,48 @@
+{
+  "editor.tabSize": 2,
+  "editor.wordWrapColumn": 150,
+  "prettier.prettierPath": "./node_modules/prettier",
+  "files.autoSave": "onWindowChange",
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "eslint.workingDirectories": [
+    "./client",
+    "./server"
+  ],
+  "liveServer.settings.proxy": {
+    "enable": true,
+    "baseUri": "/api",
+    "proxyUri": "http://127.0.0.1:8060/api"
+  },
+  "liveServer.settings.root": "/client/build",
+  "liveServer.settings.port": 5501,
+  "cSpell.words": [
+    "Resizer",
+    "Sider",
+    "cascader",
+    "datepicker",
+    "dics",
+    "echart",
+    "endregion",
+    "ents",
+    "ronds",
+    "successed",
+    "tailwindcss"
+  ],
+  "eslint.codeActionsOnSave.mode": "problems",
+  "eslint.format.enable": true,
+  "eslint.run": "onSave",
+  "prettier.packageManager": "yarn",
+  "typescript.tsdk": "client/node_modules/typescript/lib",
+  "gitlens.advanced.messages": {
+    "suppressCommitHasNoPreviousCommitWarning": true
+  },
+  "tailwindCSS.includeLanguages": {
+    "plaintext": "js",
+    "typescript": "tsx"
+  },
+  "emmet.triggerExpansionOnTab": true,
+  "editor.quickSuggestions": {
+    "strings": true
+  },
+}

@@ -1,7 +1,7 @@
 /*
  * @Author: wangxian
  * @Date: 2022-08-18 10:10:48
- * @LastEditTime: 2022-08-18 17:22:31
+ * @LastEditTime: 2022-08-18 19:00:08
  */
 import {
   Controller,
@@ -37,7 +37,6 @@ export class UserController {
    * @param body
    * @returns
    */
-  @UseGuards(AuthGuard('jwt'))
   @Post('register')
   public register(@Body() body: CreateUserDto) {
     return this.userService.register(body);

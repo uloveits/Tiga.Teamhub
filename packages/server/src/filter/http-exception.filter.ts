@@ -1,7 +1,7 @@
 /*
  * @Author: wangxian
  * @Date: 2022-08-18 11:44:12
- * @LastEditTime: 2022-08-18 17:08:07
+ * @LastEditTime: 2022-08-18 18:56:57
  */
 import {
   ExceptionFilter,
@@ -14,6 +14,7 @@ import { Request, Response } from 'express';
 @Catch()
 export class HttpExceptionFilter implements ExceptionFilter {
   catch(exception: HttpException, host: ArgumentsHost) {
+    console.log('===================exception', exception);
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
     const request = ctx.getRequest<Request>();
@@ -24,8 +25,6 @@ export class HttpExceptionFilter implements ExceptionFilter {
       request.url,
       exception.message,
     );
-
-    console.log('===================exception', exception.getResponse());
 
     response.status(status).json({
       code: status,

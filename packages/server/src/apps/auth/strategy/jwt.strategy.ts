@@ -1,7 +1,7 @@
 /*
  * @Author: wangxian
  * @Date: 2022-08-18 15:57:22
- * @LastEditTime: 2022-08-18 16:06:48
+ * @LastEditTime: 2022-08-19 11:40:21
  */
 
 import { ExtractJwt, Strategy } from 'passport-jwt';
@@ -23,9 +23,9 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   async validate(payload: any) {
     console.log(`JWT验证 - Step 4: 被守卫调用`);
     return {
-      userId: payload.sub,
+      userId: payload.id,
+      account: payload.account,
       username: payload.username,
-      realName: payload.realName,
       role: payload.role,
     };
   }
