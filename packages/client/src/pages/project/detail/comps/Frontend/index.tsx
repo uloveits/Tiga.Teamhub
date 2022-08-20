@@ -1,7 +1,7 @@
 /*
  * @Author: wangxian
  * @Date: 2022-08-20 09:46:19
- * @LastEditTime: 2022-08-20 12:10:34
+ * @LastEditTime: 2022-08-20 13:50:40
  */
 import FrontendBoard from '@/comps/FrontendBoard';
 import './index.less';
@@ -12,7 +12,6 @@ const ProjectFrontend = () => {
       {
         id: 'lane1',
         title: '开放任务',
-        label: '2/2',
         cards: [
           {
             id: 'Card1',
@@ -40,25 +39,21 @@ const ProjectFrontend = () => {
       {
         id: 'lane2',
         title: '计划中',
-        label: '0/0',
         cards: [],
       },
       {
         id: 'lane3',
         title: '正在进行',
-        label: '0/0',
         cards: [],
       },
       {
         id: 'lane4',
         title: '待检查',
-        label: '0/0',
         cards: [],
       },
       {
         id: 'lane5',
         title: '已归档',
-        label: '0/0',
         cards: [],
       },
     ],

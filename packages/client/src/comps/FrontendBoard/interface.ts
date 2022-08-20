@@ -1,7 +1,7 @@
 /*
  * @Author: wangxian
  * @Date: 2022-08-20 11:16:25
- * @LastEditTime: 2022-08-20 11:28:34
+ * @LastEditTime: 2022-08-20 13:36:35
  */
 export namespace FBoard {
   export interface Card {
@@ -10,7 +10,7 @@ export namespace FBoard {
     title: string;
     startTime: string;
     endTime: string;
-    assignee: { id: number; username: string }[];
+    assignee: { id: number; username: string; color: string }[];
     completRate: number;
   }
 
