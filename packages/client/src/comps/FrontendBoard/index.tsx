@@ -11,9 +11,14 @@ import './index.less';
 
 interface IFrontendBoardProps {
   data: any;
+  onAddCard?: (laneId: string | number) => void;
+  onCardClick?: (id: string | number) => void;
+  onDataChange?: (data: any) => void;
+  handleDragEnd?: (data: any) => void;
+  onCardMoveAcrossLanes?: (data: any) => void;
 }
 const FrontendBoard = (props: IFrontendBoardProps) => {
-  const { data } = props;
+  const { data, onAddCard, onCardClick, onDataChange, handleDragEnd, onCardMoveAcrossLanes } = props;
 
   const components = {
     AddCardLink: (record: any) => {
@@ -26,26 +31,28 @@ const FrontendBoard = (props: IFrontendBoardProps) => {
     },
     LaneHeader: (record: any) => {
       console.log('LaneHeader', record);
-      return <FbHeader {...record} />;
+      return <FbHeader {...record} onAddCard={onAddCard} />;
     },
     Card: (record: any) => {
-      return <FbCard {...record} />;
+      return <FbCard {...record} onCardClick={onCardClick} />;
     },
   };
 
-  const onCardClick = (id: string) => {
-    console.log('onCardClick', id);
-  };
   const onCardDelete = (id: string) => {
     console.log('onCardDelete', id);
-  };
-  const onDataChange = (id: string) => {
-    console.log('onDataChange', id);
   };
 
   return (
     <>
-      <Board components={components} data={data} draggable onCardClick={onCardClick} onCardDelete={onCardDelete} onDataChange={onDataChange} />
+      <Board
+        components={components}
+        data={data}
+        draggable
+        onCardDelete={onCardDelete}
+        onDataChange={onDataChange}
+        handleDragEnd={handleDragEnd}
+        onCardMoveAcrossLanes={onCardMoveAcrossLanes}
+      />
     </>
   );
 };

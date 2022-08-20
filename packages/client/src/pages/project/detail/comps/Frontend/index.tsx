@@ -59,9 +59,35 @@ const ProjectFrontend = () => {
     ],
   };
 
+  const onAddCard = (laneId: string | number) => {
+    console.log('onAddCard', laneId);
+  };
+
+  const onCardClick = (id: string | number) => {
+    console.log('onCardClick', id);
+  };
+
+  const onDataChange = (_data: any) => {
+    console.log('onDataChange', _data);
+  };
+
+  const onCardMoveAcrossLanes = (_data: any) => {
+    console.log('onCardMoveAcrossLanes', _data);
+  };
+
+  const handleDragEnd = (_data: any) => {
+    console.log('handleDragEnd', _data);
+  };
   return (
     <>
-      <FrontendBoard data={data} />
+      <FrontendBoard
+        data={data}
+        onAddCard={onAddCard}
+        onCardClick={onCardClick}
+        handleDragEnd={handleDragEnd}
+        onCardMoveAcrossLanes={onCardMoveAcrossLanes}
+        onDataChange={onDataChange}
+      />
     </>
   );
 };

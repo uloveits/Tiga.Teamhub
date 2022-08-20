@@ -6,10 +6,16 @@
 
 import { Button } from 'antd';
 
-const FbHeader = (props: any) => {
+type IFbHeaderProps =
+  | {
+      onAddCard?: (laneId: string | number) => void;
+    }
+  | any;
+
+const FbHeader = (props: IFbHeaderProps) => {
   console.log('FbHeader', props);
 
-  const { id, title, cards } = props;
+  const { id, title, cards, onAddCard } = props;
 
   return (
     <div className="w-full flex items-center">
@@ -21,7 +27,7 @@ const FbHeader = (props: any) => {
           shape="circle"
           size="small"
           onClick={() => {
-            console.log(id);
+            onAddCard && onAddCard(id);
           }}
         >
           +

@@ -6,12 +6,23 @@
 
 import { Avatar, Divider } from 'antd';
 
-const FbCard = (props: any) => {
+type IFbCardProps =
+  | {
+      onCardClick: (id: string | number) => void;
+    }
+  | any;
+const FbCard = (props: IFbCardProps) => {
   console.log('FbCard', props);
-  const { title, assignee, completRate, endTime } = props;
+  const { id, title, assignee, completRate, endTime, onCardClick } = props;
 
   return (
-    <div className="w-full bg-white shadow-inner mb-2 p-2 rounded">
+    <div
+      className="w-full bg-white shadow-inner mb-2 p-2 rounded"
+      onClick={() => {
+        onCardClick && onCardClick(id);
+      }}
+      role="button"
+    >
       <div className="flex">
         <div className="flex-1 text-sm text-green-900">{title}</div>
         <div className="text-xs text-red-600">{completRate}%</div>
