@@ -1,7 +1,7 @@
 /*
  * @Author: wangxian
  * @Date: 2022-08-18 10:10:48
- * @LastEditTime: 2022-08-19 18:44:05
+ * @LastEditTime: 2022-08-19 19:42:44
  */
 import {
   Entity,
@@ -33,8 +33,8 @@ export class Project {
    */
 
   @CreateDateColumn({ type: 'timestamp', name: 'create_time' })
-  public createTime!: Date;
+  public create_time!: Date;
 
   @UpdateDateColumn({ type: 'timestamp', name: 'update_time' })
-  public updateTime!: Date;
+  public update_time!: Date;
 }

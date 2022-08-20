@@ -2,7 +2,7 @@ import { UserException } from 'src/filter/user-exception.filter';
 /*
  * @Author: wangxian
  * @Date: 2022-08-18 15:55:23
- * @LastEditTime: 2022-08-19 10:20:28
+ * @LastEditTime: 2022-08-20 08:40:40
  */
 import { Inject, Injectable } from '@nestjs/common';
 import { UserService } from '../user/user.service';
@@ -39,6 +39,7 @@ export class AuthService {
     const payload = {
       account: user.account,
       username: user.username,
+      color: user.color,
       id: user.id,
     };
     console.log(

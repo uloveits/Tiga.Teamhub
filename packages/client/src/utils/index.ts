@@ -98,28 +98,3 @@ export function GetRequest(url: string) {
   }
   return theRequest;
 }
-
-// function genTestData(start_value: number = 0, stop_value: number = 100, point_num: number = 128 * 1024, trace_num: number = 1) {
-//   const gaussianRand = () => {
-//     let rand = 0;
-//     for (let i = 0; i < 6; i += 1) {
-//       rand += Math.random();
-//     }
-//     return rand / 6 - 0.5;
-//   };
-
-//   const curr_value = start_value;
-//   const step = (stop_value - start_value) / (point_num - 1);
-
-//   const data: { x: number[]; y: number[] }[] = [];
-//   for (let j = 0; j < trace_num; j++) {
-//     const X = [];
-//     const Y = [];
-//     for (let i = 0; i < point_num; i++) {
-//       X.push(round(curr_value + step * i, 5));
-//       Y.push(round(gaussianRand() * 8 + j * 5, 5));
-//     }
-//     data.push({ x: X, y: Y });
-//   }
-//   return data;
-// }

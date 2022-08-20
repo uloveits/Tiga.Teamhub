@@ -1,7 +1,7 @@
 /*
  * @Author: wangxian
  * @Date: 2022-08-18 10:10:48
- * @LastEditTime: 2022-08-18 18:52:33
+ * @LastEditTime: 2022-08-20 08:35:21
  */
 import {
   Entity,
@@ -27,6 +27,9 @@ export class User {
 
   @Column({ type: 'varchar', name: 'password_salt', length: 255 })
   public password_salt: string;
+
+  @Column({ type: 'varchar', name: 'color', length: 10 })
+  public color: string;
 
   @Column({ type: 'varchar', name: 'phone', length: 120 })
   public phone: string;

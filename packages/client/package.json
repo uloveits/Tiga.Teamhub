@@ -60,6 +60,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
     "react-split": "^2.0.9",
+    "react-trello": "^2.2.11",
     "ronds-graph-chart-phm": "^1.0.5",
     "ronds-metadata": "^1.1.33",
     "ronds-react-ui": "^1.0.54",

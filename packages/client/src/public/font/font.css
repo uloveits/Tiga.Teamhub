@@ -1,0 +1,37 @@
+@font-face {
+  font-family: 'HarmonyOS_Sans_SC_Medium';
+  src: url('./HarmonyOS_Sans_Medium.woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'HarmonyOS_Sans_SC_Regular';
+  src: url('./HarmonyOS_Sans_Regular.woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* 加粗字体 */
+
+@font-face {
+  font-family: HarmonyOS_Sans_SC_Medium;
+  font-style: normal;
+  font-display: swap;
+  src: url('./HarmonyOS_Sans_Medium.woff');
+}
+
+/* 正常字体 */
+
+@font-face {
+  font-family: HarmonyOS_Sans_SC_Regular;
+  font-style: normal;
+  font-display: swap;
+  src: url('./HarmonyOS_Sans_Regular.woff');
+}
+
+* {
+  font-family: HarmonyOS_Sans_SC_Regular, Inter, -apple-system, BlinkMacSystemFont, PingFang SC, Hiragino Sans GB, noto sans, Microsoft YaHei,
+    Helvetica Neue, Helvetica, Arial, sans-serif;
+  /* font-family: HarmonyOS_Sans_SC_Regular; */
+}

@@ -16,3 +16,4 @@ declare function tr(
       }
     | string
 ): string;
+declare module 'react-trello';

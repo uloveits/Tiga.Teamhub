@@ -1,9 +1,9 @@
 /*
  * @Author: wangxian
  * @Date: 2022-08-04 19:32:02
- * @LastEditTime: 2022-08-19 18:54:48
+ * @LastEditTime: 2022-08-20 09:06:27
  */
-import { Button } from 'antd';
+import { Button, message } from 'antd';
 import { FormInstance } from 'antd/lib/form';
 import React from 'react';
 import { Modal } from 'ronds-react-ui';
@@ -18,7 +18,7 @@ const ProjectList = () => {
 
   const formRef = React.useRef<FormInstance>();
 
-  React.useEffect(() => {
+  const getMyProjectList = React.useCallback(() => {
     ProjectApi.getMyProjectList().then((res) => {
       if (res.successed) {
         console.log('getMyProjectList', res);
@@ -27,8 +27,18 @@ const ProjectList = () => {
     });
   }, []);
 
-  const onFinish = (values: any) => {
+  React.useEffect(() => {
+    getMyProjectList();
+  }, [getMyProjectList]);
+
+  const onFinish = async (values: any) => {
     console.log('onFinsi', values);
+    const res = await ProjectApi.saveProject(values);
+    if (res.successed) {
+      message.success('创建成功');
+      getMyProjectList();
+      setIsModal(false);
+    }
   };
 
   return (
@@ -120,7 +130,7 @@ const ADD_SCHEMA = [
         ],
       },
       {
-        id: 'describe',
+        id: 'des',
         type: 'text',
         fields: [
           {

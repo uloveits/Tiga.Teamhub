@@ -1,8 +1,9 @@
 /*
  * @Author: wangxian
  * @Date: 2022-08-18 10:10:48
- * @LastEditTime: 2022-08-18 18:59:13
+ * @LastEditTime: 2022-08-20 08:36:30
  */
+
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -11,6 +12,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 import { encryptPassword, makeSalt } from '../../utils/cryptogram';
 import { UserException } from 'src/filter/user-exception.filter';
+import { getRandomColor } from './../../utils/utils';
 
 @Injectable()
 export class UserService {
@@ -31,6 +33,7 @@ export class UserService {
       user.account = body.account;
       user.username = body.username;
       user.phone = body.phone;
+      user.color = getRandomColor();
       user.password = hashPwd;
       user.password_salt = salt;
 

@@ -2,7 +2,7 @@ import { UpdateProjectMemberDto } from './dto/update-project-member.dto';
 /*
  * @Author: wangxian
  * @Date: 2022-08-18 18:07:57
- * @LastEditTime: 2022-08-19 16:36:44
+ * @LastEditTime: 2022-08-20 08:38:16
  */
 import { Project } from './entities/project.entity';
 import { Injectable } from '@nestjs/common';
@@ -38,7 +38,7 @@ export class ProjectService {
   async findAll(user: any) {
     console.log(user);
     // 获取当前用户项目列表
-    const findMyProjectSql = `select P.id, P.name, P.des, P.create_time, P.update_time
+    const findMyProjectSql = `select P.id, P.name, P.des,P.color, P.create_time, P.update_time
                                 from project_user PU
                                 left join project P 
                                 on PU.project_id = P.id
@@ -47,7 +47,7 @@ export class ProjectService {
 
     // 循环找到项目的成员信息
     for (let i = 0; i < allProject.length; i++) {
-      const findProjectUserSql = `select U.id, U.account, U.username 
+      const findProjectUserSql = `select U.id, U.account, U.username, U.color, PU."isManaged" 
                                     from project_user PU 
                                     left join "user" U on PU.user_id = U.id 
                                     where U."isDeleted" = false and PU.project_id = ${allProject[i].id}`;

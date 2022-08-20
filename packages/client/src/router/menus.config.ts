@@ -1,7 +1,7 @@
 /*
  * @Author: wangxian
  * @Date: 2021-11-26 19:05:30
- * @LastEditTime: 2022-08-19 16:41:32
+ * @LastEditTime: 2022-08-20 09:01:45
  */
 const MENUS = [
   { title: '首页', path: 'home', icon: 'dashboard', hidden: false, comp: 'home', children: [] },
@@ -10,7 +10,10 @@ const MENUS = [
     path: 'project',
     icon: 'module',
     hidden: false,
-    children: [{ title: '项目列表', path: 'project/list', hidden: false, comp: 'project/list', children: [] }],
+    children: [
+      { title: '项目列表', path: 'project/list', hidden: false, comp: 'project/list', children: [] },
+      { title: '项目详情', path: 'project/detail', hidden: true, comp: 'project/detail', children: [] },
+    ],
   },
   {
     title: '文档管理',

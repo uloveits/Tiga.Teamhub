@@ -1,7 +1,7 @@
 /*
  * @Author: wangxian
  * @Date: 2022-08-19 16:08:42
- * @LastEditTime: 2022-08-19 18:14:10
+ * @LastEditTime: 2022-08-20 08:41:34
  */
 import React from 'react';
 import logo from '@/public/img/logo.png';
@@ -74,7 +74,11 @@ const MyHeader = () => {
             <Button className="header-icon mlr-20" type="link" icon={<Icon type="fa-record" style={{ fontSize: '24px' }} />} />
           </Tooltip> */}
           <Dropdown overlay={content} overlayStyle={{ width: '120px' }} placement="bottomRight" arrow>
-            <Avatar className="avatar mlr-20" style={{ backgroundColor: '#7265e6', verticalAlign: 'middle' }} size="large">
+            <Avatar
+              className="avatar mlr-20"
+              style={{ backgroundColor: `${(getFromLS(USER_CACHE_KEY) as any).color}`, verticalAlign: 'middle' }}
+              size="large"
+            >
               {(getFromLS(USER_CACHE_KEY) as any).username}
             </Avatar>
           </Dropdown>
