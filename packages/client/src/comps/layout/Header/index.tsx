@@ -26,7 +26,7 @@ const MyHeader = () => {
       <Menu.Item>
         <div>
           <Icon type="fa-user" className="mr-10" />
-          <span style={{ fontSize: '16px' }}> {(getFromLS(USER_CACHE_KEY) as any).username}</span>
+          <span style={{ fontSize: '16px' }}> {(getFromLS(USER_CACHE_KEY) as any)?.username || ''}</span>
         </div>
       </Menu.Item>
       <Separation />
@@ -76,10 +76,10 @@ const MyHeader = () => {
           <Dropdown overlay={content} overlayStyle={{ width: '120px' }} placement="bottomRight" arrow>
             <Avatar
               className="avatar mlr-20"
-              style={{ backgroundColor: `${(getFromLS(USER_CACHE_KEY) as any).color}`, verticalAlign: 'middle' }}
+              style={{ backgroundColor: `${(getFromLS(USER_CACHE_KEY) as any)?.color}`, verticalAlign: 'middle' }}
               size="large"
             >
-              {(getFromLS(USER_CACHE_KEY) as any).username}
+              {(getFromLS(USER_CACHE_KEY) as any)?.username || ''}
             </Avatar>
           </Dropdown>
         </div>

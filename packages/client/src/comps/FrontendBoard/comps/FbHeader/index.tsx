@@ -5,7 +5,6 @@
  */
 
 import { Button } from 'antd';
-import { PlusOutlined } from '@ant-design/icons';
 
 const FbHeader = (props: any) => {
   console.log('FbHeader', props);

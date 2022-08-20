@@ -32,9 +32,9 @@ export class Project {
    * Create and Update Date Columns
    */
 
-  @CreateDateColumn({ type: 'timestamp', name: 'create_time' })
+  @CreateDateColumn({ type: 'datetime', name: 'create_time' })
   public create_time!: Date;
 
-  @UpdateDateColumn({ type: 'timestamp', name: 'update_time' })
+  @UpdateDateColumn({ type: 'datetime', name: 'update_time' })
   public update_time!: Date;
 }
