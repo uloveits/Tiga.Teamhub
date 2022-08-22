@@ -31,8 +31,8 @@ export class ProjectTask {
   @Column({ type: 'int4', name: 'workflow', default: 1 })
   public workflow!: string;
 
-  @Column({ type: 'int4', name: 'conpleteRate', default: 0 })
-  public conpleteRate!: number;
+  @Column({ type: 'int4', name: 'completeRate', default: 0 })
+  public completeRate!: number;
 
   @Column({ type: 'date', name: 'startTime' })
   public startTime!: string;

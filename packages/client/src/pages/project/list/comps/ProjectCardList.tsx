@@ -22,7 +22,7 @@ const ProjectCardList = (props: IProjectCardListProps) => {
                 className="drop-shadow-sm rounded p-2 mb-2 flex gap-4 items-center cursor-pointer"
                 style={{ background: '#fff', border: '1px solid #E5E6EB' }}
                 onClick={() => {
-                  window.location.href = `/#/project/detail?id=${it.id}`;
+                  window.location.href = `/#/project/detail?id=${it.id}&name=${it.name}`;
                 }}
                 role="button"
               >

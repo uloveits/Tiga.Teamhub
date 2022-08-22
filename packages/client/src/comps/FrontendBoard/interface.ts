@@ -21,3 +21,11 @@ export namespace FBoard {
     cards: Card[];
   }
 }
+
+const LANES_TYPE = [
+  { key: 1, value: '开放任务' },
+  { key: 2, value: '计划中' },
+  { key: 3, value: '进行中' },
+  { key: 4, value: '待检查' },
+  { key: 5, value: '已归档' },
+];

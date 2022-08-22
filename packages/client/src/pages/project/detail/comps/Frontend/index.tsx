@@ -3,10 +3,16 @@
  * @Date: 2022-08-20 09:46:19
  * @LastEditTime: 2022-08-20 13:50:40
  */
+import ProjectApi from '@/api/ProjectApi';
 import FrontendBoard from '@/comps/FrontendBoard';
-import './index.less';
+import React from 'react';
 
-const ProjectFrontend = () => {
+interface IProjectFrontendProps {
+  projectId: number;
+}
+
+const ProjectFrontend = (props: IProjectFrontendProps) => {
+  const { projectId } = props;
   const data = {
     lanes: [
       {
@@ -58,6 +64,27 @@ const ProjectFrontend = () => {
       },
     ],
   };
+
+  const [list, setList] = React.useState<any[]>([]);
+
+  const processListData2Board = React.useCallback((_data: any[]) => {
+    setList([..._data]);
+  }, []);
+
+  const getTaskList = React.useCallback(async () => {
+    const param = { projectId };
+
+    const res = await ProjectApi.getMyProjectTaskList(param);
+    if (res.successed) {
+      processListData2Board(res.data);
+    }
+  }, [projectId]);
+
+  React.useEffect(() => {
+    getTaskList();
+  }, [projectId, getTaskList]);
+
+  console.log(list);
 
   const onAddCard = (laneId: string | number) => {
     console.log('onAddCard', laneId);

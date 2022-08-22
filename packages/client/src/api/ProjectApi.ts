@@ -25,4 +25,13 @@ export default class ProjectApi {
     const api = '/api/project';
     return HttpClient.fetch<any>(api, { method: 'post', data });
   }
+
+  /**
+   *  获取当前用户项目列表
+   * @returns
+   */
+  static getMyProjectTaskList(data: any) {
+    const api = '/api/project/task/{projectId}/list'.replace('{projectId}', data.projectId);
+    return HttpClient.fetch<any>(api, { method: 'post', data });
+  }
 }

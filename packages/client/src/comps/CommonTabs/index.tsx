@@ -27,10 +27,11 @@ interface ICommonTabsProps {
   onTabChange?: (data: string) => void;
   onRemoveTab?: (targetKey: string) => void;
   onMaxChange?: (b: boolean) => void;
+  onTitleClick?: () => void;
 }
 
 const CommonTabs = (props: ICommonTabsProps) => {
-  const { name, curTab, tabs, tabBarStyle, onTabChange, onRemoveTab, onMaxChange } = props;
+  const { name, curTab, tabs, tabBarStyle, onTabChange, onRemoveTab, onMaxChange, onTitleClick } = props;
 
   const [isMaxSize, setIsMaxSize] = React.useState<boolean>(false);
 
@@ -82,7 +83,19 @@ const CommonTabs = (props: ICommonTabsProps) => {
         hideAdd={true}
         onChange={onMyTabChange}
         onEdit={onEdit}
-        tabBarExtraContent={name ? { left: <div className=" text-lg pl-6 pr-6">{name}</div> } : <div style={{ width: '10px' }} />}
+        tabBarExtraContent={
+          name ? (
+            {
+              left: (
+                <div role="button" onClick={onTitleClick} className=" text-lg pl-6 pr-6 cursor-pointer">
+                  {name}
+                </div>
+              ),
+            }
+          ) : (
+            <div style={{ width: '10px' }} />
+          )
+        }
       >
         {tabs.map((it) => (
           <TabPane className="h-full" tab={it.label} key={it.key} closable={it.closable || false}>
