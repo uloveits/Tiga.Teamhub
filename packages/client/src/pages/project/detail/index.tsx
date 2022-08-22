@@ -1,7 +1,7 @@
 /*
  * @Author: wangxian
  * @Date: 2022-08-20 09:00:56
- * @LastEditTime: 2022-08-20 10:04:05
+ * @LastEditTime: 2022-08-22 08:22:41
  */
 
 import React from 'react';
@@ -19,7 +19,7 @@ const ProjectDetail = () => {
     { label: '成员', key: 'member', closable: false, content: <>成员</> },
     { label: '统计', key: 'statistics', closable: false, content: <>统计</> },
   ];
-  const [curTab, setCurTab] = React.useState<string>('dashboard');
+  const [curTab, setCurTab] = React.useState<string>('task');
 
   const onTabChange = (key: string) => {
     setCurTab(key);

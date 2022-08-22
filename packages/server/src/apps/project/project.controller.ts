@@ -1,7 +1,7 @@
 /*
  * @Author: wangxian
  * @Date: 2022-08-18 18:07:57
- * @LastEditTime: 2022-08-19 16:19:32
+ * @LastEditTime: 2022-08-22 17:08:40
  */
 import {
   Controller,
@@ -50,6 +50,7 @@ export class ProjectController {
   findAll(@Req() request: Request) {
     return this.projectService.findAll((request as any).user);
   }
+
   /**
    * 更新项目成员信息
    * @param id

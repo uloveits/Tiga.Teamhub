@@ -1,0 +1,127 @@
+@keyframes move {
+  from {
+    transform: translateX(-100%);
+  }
+
+  to {
+    transform: translateX(100%);
+  }
+}
+
+html {
+  .table_header {
+    padding: 0 !important;
+  }
+  .inline-loading {
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    background-color: #eee;
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      background-position: left top;
+      background-repeat: no-repeat;
+      background-image: linear-gradient(to right, transparent, #ccc, transparent);
+      animation: move 1.5s linear infinite;
+    }
+  }
+  .BaseTable__overlay__loading {
+    background-color: transparent;
+  }
+
+  .BaseTable__table__hidden__scrollbar {
+    .BaseTable__body {
+      overflow: hidden !important;
+    }
+  }
+
+  .BaseTable__rowspan-cell-top {
+    .table-span-cell {
+      align-items: flex-start;
+      & > div {
+        margin-top: 4px;
+      }
+    }
+  }
+
+  .ant-table-column-sorter-inner {
+    padding-left: 7.5px;
+  }
+  .BaseTable__header-row:not(:last-child) {
+    border-width: 2px;
+  }
+  .base-table-group-head {
+    .BaseTable__header-row {
+      border-width: 2px;
+    }
+  }
+
+  .BaseTable__table-main-bordered .BaseTable__row-cell {
+    border-right: 0;
+  }
+  // .BaseTable__table-main-bordered .BaseTable__row .BaseTable__row-cell:first-child {
+  //   border-left: 0;
+  // }
+
+  .BaseTable__header-row {
+    background-color: #ebebeb;
+  }
+  .BaseTable__header-cell {
+    background-color: #ebebeb;
+    border-right: 1px solid #f2f2f2;
+  }
+  .BaseTable__header-cell--resizing,
+  .BaseTable__header-cell {
+    background-color: #ebebeb;
+  }
+  .base-table-group-head {
+    .BaseTable__header-row {
+      border-width: 2px;
+    }
+    .BaseTable__header-row {
+      border-bottom: 2px solid #f2f2f2;
+    }
+  }
+  .BaseTable__header-row--resizing .BaseTable__header-cell {
+    background-color: #ebebeb !important;
+  }
+
+  .ant-searchbar-mode-2 {
+    .ant-btn > .anticon + span,
+    .ant-btn > span + .anticon {
+      margin-left: 8px;
+    }
+    .ant-btn > .ant-btn-loading-icon .anticon {
+      padding-right: 8px;
+    }
+  }
+
+  .table-multi-header-border-right {
+    // border-color: var(--border-color);
+    border-right: 1px solid #eeeeee;
+  }
+  .table-multi-header-border-bottom {
+    // border-color: var(--border-color);
+    border-bottom: 1px solid #eeeeee;
+  }
+
+  // .BaseTable__row--even {
+  //   // background-color: #ebebeb !important;
+  // }
+
+  .BaseTable__row--expanded {
+    margin-top: 10px;
+    height: 30px !important;
+    background-color: #ebebeb !important;
+  }
+  // .BaseTable__row {
+  //   height: 30px !important;
+  // }
+}

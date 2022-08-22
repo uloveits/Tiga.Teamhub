@@ -1,7 +1,7 @@
 /*
  * @Author: wangxian
  * @Date: 2022-08-18 10:10:48
- * @LastEditTime: 2022-08-19 19:42:44
+ * @LastEditTime: 2022-08-22 10:39:26
  */
 import {
   Entity,
@@ -32,9 +32,9 @@ export class Project {
    * Create and Update Date Columns
    */
 
-  @CreateDateColumn({ type: 'datetime', name: 'create_time' })
+  @CreateDateColumn({ type: 'timestamp', name: 'create_time' })
   public create_time!: Date;
 
-  @UpdateDateColumn({ type: 'datetime', name: 'update_time' })
+  @UpdateDateColumn({ type: 'timestamp', name: 'update_time' })
   public update_time!: Date;
 }
