@@ -98,3 +98,91 @@ export function GetRequest(url: string) {
   }
   return theRequest;
 }
+
+export function handleSameTypeList(list: any[], name: string, resultList: any[] = []): any[] {
+  // 每一个类型的单独数组，注意此处不能return出每个sameTypeArr，
+  // 因为递归的返回值只返回最后一次的值
+  const sameTypeList: any[] = [];
+  let propVal = '';
+
+  if (list.length > 0) {
+    propVal = list[0][`${name}`];
+    const tempList: any[] = [];
+    // 将含有相同的name属性值的对象push到此次遍历的list中，
+    // 将其他的对象放入到tempList中，下次遍历
+    list.forEach((item, key) => {
+      if (item[`${name}`] === propVal) {
+        sameTypeList.push(item);
+      } else {
+        tempList.push(item);
+      }
+    });
+    resultList.push(sameTypeList);
+    list = tempList;
+    return handleSameTypeList(list, name, resultList);
+  }
+
+  return resultList;
+}
+
+/**
+ * 调用时不用把参数补全; getValue(array, key) 一样可以调用
+ * @param array 数组
+ * @param key 指定的数值
+ * @returns {string|string|string}
+ */
+export function getConstantValue(array: any[], key: string | number, strKey?: string, strValue?: string): string {
+  let result = '';
+  let _strKey = 'id';
+  let _strValue = 'value';
+  if (strKey) {
+    _strKey = strKey;
+  }
+  if (strValue) {
+    _strValue = strValue;
+  }
+  if (array) {
+    for (const item of array) {
+      if (key === item[_strKey]) {
+        result = item[_strValue];
+      }
+    }
+  }
+  return result;
+}
+
+/**
+ *
+ * @param array
+ * @param keys
+ * @param index
+ * @returns
+ */
+export function recursiveGrouping(array: any[], keys: string[], by = 'name', index = 0, key: string[] = []) {
+  const temp: { id: string; [x: string]: any; children: any[] }[] = [];
+  const id: string[] = key;
+  if (keys[index]) {
+    array.forEach((item) => {
+      const data = temp.find((x) => x[by] === item[keys[index]]);
+
+      if (data) {
+        data.children.push(item);
+      } else {
+        const _id = Guid();
+        temp.push({
+          id: _id,
+          [by]: item[keys[index]],
+          children: [item],
+        });
+        id.push(_id);
+      }
+    });
+    index = index + 1;
+    temp.forEach((item) => {
+      item.children = recursiveGrouping(item.children, keys, by, index, id).data;
+    });
+  } else {
+    return { data: array, id };
+  }
+  return { data: temp, id };
+}

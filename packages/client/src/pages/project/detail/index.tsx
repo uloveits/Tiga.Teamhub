@@ -7,6 +7,7 @@
 import React from 'react';
 import { GetRequest } from '@/utils';
 import CommonTabs from '@/comps/CommonTabs';
+import ProjectGantt from './comps/Gantt';
 
 const ProjectFrontend = React.lazy(() => import('./comps/Frontend'));
 const ProjectTask = React.lazy(() => import('./comps/Task'));
@@ -32,7 +33,7 @@ const ProjectDetail = () => {
       return [
         { label: '看板', key: 'dashboard', closable: false, content: <ProjectFrontend projectId={projectId} /> },
         { label: '任务', key: 'task', closable: false, content: <ProjectTask projectId={projectId} /> },
-        { label: '甘特图', key: 'gantt', closable: false, content: <>甘特图</> },
+        { label: '甘特图', key: 'gantt', closable: false, content: <ProjectGantt projectId={projectId} /> },
         { label: '成员', key: 'member', closable: false, content: <>成员</> },
         { label: '统计', key: 'statistics', closable: false, content: <>统计</> },
       ];

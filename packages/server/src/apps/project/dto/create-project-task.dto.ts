@@ -1,7 +1,7 @@
 /*
  * @Author: wangxian
  * @Date: 2022-08-18 18:07:57
- * @LastEditTime: 2022-08-22 17:06:55
+ * @LastEditTime: 2022-08-23 09:21:14
  */
 import { IsNotEmpty } from 'class-validator';
 
@@ -24,6 +24,9 @@ export class CreateProjectTaskDto {
 
   @IsNotEmpty()
   public assignee: string;
+
+  @IsNotEmpty()
+  public assignee_color: string;
 
   @IsNotEmpty()
   public iteration: string;

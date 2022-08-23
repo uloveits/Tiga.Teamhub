@@ -7044,11 +7044,6 @@ fragment-cache@^0.2.1:
   dependencies:
     map-cache "^0.2.2"
 
-frappe-gantt@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/frappe-gantt/-/frappe-gantt-0.2.0.tgz#6512816557f47c0718349add38366d27425a74ba"
-  integrity sha1-ZRKBZVf0fAcYNJrdODZtJ0JadLo=
-
 fresh@0.5.2:
   version "0.5.2"
   resolved "https://registry.yarnpkg.com/fresh/-/fresh-0.5.2.tgz#3d8cadd90d976569fa835ab1f8e4b23a105605a7"
@@ -7164,13 +7159,10 @@ functional-red-black-tree@^1.0.1:
   resolved "https://registry.yarnpkg.com/functional-red-black-tree/-/functional-red-black-tree-1.0.1.tgz#1b0ab3bd553b2a0d6399d29c0e3ea0b252078327"
   integrity sha1-GwqzvVU7Kg1jmdKcDj6gslIHgyc=
 
-gantt-for-react@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/gantt-for-react/-/gantt-for-react-0.2.0.tgz#d6ec44cf3f033566ad539019615d683fe2e7abd3"
-  integrity sha512-OweNBF2ledGig7CEShe1WXcrfkrfjBdWgdEENmfynUQeReB6zjQCWvadE+jFRGKbdxySquVFee2HNhdlAJ2ufQ==
-  dependencies:
-    frappe-gantt "^0.2.0"
-    size-sensor "^0.2.0"
+gantt-task-react@^0.3.9:
+  version "0.3.9"
+  resolved "https://registry.yarnpkg.com/gantt-task-react/-/gantt-task-react-0.3.9.tgz#f538c1a92f617af929b93cb5cd28237bf5f60ce1"
+  integrity sha512-ged2OGrAJJ+ATrfVVkd4/8cUu4jOu1mXi0NaBeKx4uoGP6YhyryL+Snr2OY48AXdFelUAg7BbqylSej9X6PCCQ==
 
 gensync@^1.0.0-beta.1:
   version "1.0.0-beta.1"
@@ -13973,11 +13965,6 @@ sisteransi@^1.0.4, sisteransi@^1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/sisteransi/-/sisteransi-1.0.5.tgz#134d681297756437cc05ca01370d3a7a571075ed"
   integrity sha512-bLGGlR1QxBcynn2d5YmDX4MGjlZvy2MRBDRNHLJ8VI6l6+9FUiyTFNJ0IveOSP0bcXgVDPRcfGqA0pjaqUpfVg==
-
-size-sensor@^0.2.0:
-  version "0.2.6"
-  resolved "https://registry.yarnpkg.com/size-sensor/-/size-sensor-0.2.6.tgz#6fe43afd570786f097171834002a97fe0b19a3da"
-  integrity sha512-0EZ0tXXjyRl9R9+JpoBdH57Xpnbf5NTyDdj7fnFL6KqCsdKyah286ShMflnV2SonnrSFH4OAT/52Jy8qqnoerg==
 
 slash@^3.0.0:
   version "3.0.0"

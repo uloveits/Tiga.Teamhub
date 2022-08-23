@@ -1,11 +1,14 @@
 /*
  * @Author: wangxian
  * @Date: 2022-08-20 09:46:19
- * @LastEditTime: 2022-08-20 13:50:40
+ * @LastEditTime: 2022-08-23 09:17:34
  */
 import ProjectApi from '@/api/ProjectApi';
 import FrontendBoard from '@/comps/FrontendBoard';
+import { handleSameTypeList } from '@/utils';
+import { LANES_DATA } from '@/comps/FrontendBoard/constants';
 import React from 'react';
+import { FBoard } from '@/comps/FrontendBoard/interface';
 
 interface IProjectFrontendProps {
   projectId: number;
@@ -13,62 +16,21 @@ interface IProjectFrontendProps {
 
 const ProjectFrontend = (props: IProjectFrontendProps) => {
   const { projectId } = props;
-  const data = {
-    lanes: [
-      {
-        id: 'lane1',
-        title: '开放任务',
-        cards: [
-          {
-            id: 'Card1',
-            pid: 'lane1',
-            title: '无趋势节点标签数据回显',
-            startTime: '2022/08/12',
-            endTime: '2022/08/20',
-            assignee: [
-              { id: 1, username: '王宪', color: '#51f298' },
-              { id: 2, username: '胡飞', color: '#ebb73b' },
-            ],
-            completRate: 100,
-          },
-          {
-            id: 'Card2',
-            pid: 'lane1',
-            title: '标注任务自定义属性',
-            startTime: '2022/08/12',
-            endTime: '2022/08/20',
-            assignee: [{ id: 1, username: '王宪', color: '#51f298' }],
-            completRate: 0,
-          },
-        ],
-      },
-      {
-        id: 'lane2',
-        title: '计划中',
-        cards: [],
-      },
-      {
-        id: 'lane3',
-        title: '正在进行',
-        cards: [],
-      },
-      {
-        id: 'lane4',
-        title: '待检查',
-        cards: [],
-      },
-      {
-        id: 'lane5',
-        title: '已归档',
-        cards: [],
-      },
-    ],
-  };
 
   const [list, setList] = React.useState<any[]>([]);
 
-  const processListData2Board = React.useCallback((_data: any[]) => {
-    setList([..._data]);
+  const processListData2Board = React.useCallback((values: any[]) => {
+    const lanesData: FBoard.Lanes[] = LANES_DATA;
+    if (values.length > 0) {
+      const _data = handleSameTypeList(values, 'workflow', []);
+
+      for (let i = 0; i < _data.length; i++) {
+        const idx = lanesData.findIndex((it) => it.id === _data[i][0].workflow);
+        lanesData[idx].cards = _data[i];
+      }
+    }
+
+    setList([...lanesData]);
   }, []);
 
   const getTaskList = React.useCallback(async () => {
@@ -78,7 +40,7 @@ const ProjectFrontend = (props: IProjectFrontendProps) => {
     if (res.successed) {
       processListData2Board(res.data);
     }
-  }, [projectId]);
+  }, [projectId, processListData2Board]);
 
   React.useEffect(() => {
     getTaskList();
@@ -108,7 +70,7 @@ const ProjectFrontend = (props: IProjectFrontendProps) => {
   return (
     <>
       <FrontendBoard
-        data={data}
+        data={{ lanes: list }}
         onAddCard={onAddCard}
         onCardClick={onCardClick}
         handleDragEnd={handleDragEnd}

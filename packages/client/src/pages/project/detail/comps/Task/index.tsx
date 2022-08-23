@@ -1,13 +1,15 @@
-/*
+/**
  * @Author: wangxian
  * @Date: 2022-08-20 09:46:19
- * @LastEditTime: 2022-08-22 14:56:42
+ * @LastEditTime: 2022-08-23 16:47:17
  */
 
 import ProjectApi from '@/api/ProjectApi';
-import { Button, Tag } from 'antd';
+import { recursiveGrouping } from '@/utils';
+import { Button, Popover, Tag } from 'antd';
 import React from 'react';
 import { Table } from 'ronds-react-ui';
+import GroupSetting from './comps/GroupSetting';
 
 interface IProjectTaskProps {
   projectId: number;
@@ -16,6 +18,12 @@ const ProjectTask = (props: IProjectTaskProps) => {
   const { projectId } = props;
 
   const [list, setList] = React.useState<any[]>([]);
+  const [groupList, setGroupList] = React.useState<any[]>();
+
+  const [visible, setVisible] = React.useState<boolean>(false);
+
+  const [groupSetting, setGroupSetting] = React.useState<{ name: string; order: string }[]>([]);
+  const [expandedRowKeys, setExpandedRowKeys] = React.useState<string[]>([]);
 
   const getTaskList = React.useCallback(async () => {
     const param = { projectId };
@@ -29,6 +37,29 @@ const ProjectTask = (props: IProjectTaskProps) => {
   React.useEffect(() => {
     getTaskList();
   }, [projectId, getTaskList]);
+
+  const onProcessData2Group = React.useCallback((groups: { name: string; order: string }[], data: any[]) => {
+    console.log(groups);
+    const _groupList: any[] = data;
+
+    const res = recursiveGrouping(
+      _groupList,
+      groups.map((it) => it.name)
+    );
+
+    console.log('recursiveGrouping', res);
+
+    setGroupList([...res.data]);
+    setExpandedRowKeys([...res.id]);
+  }, []);
+
+  React.useEffect(() => {
+    if (groupSetting.length > 0 && groupSetting[0].name) {
+      onProcessData2Group(groupSetting, list);
+    } else {
+      setGroupList(undefined);
+    }
+  }, [groupSetting, onProcessData2Group, list]);
 
   const columns: any[] = React.useMemo(() => {
     const res = [
@@ -48,7 +79,9 @@ const ProjectTask = (props: IProjectTaskProps) => {
           if (record?.children && record.children.length > 0) {
             return (
               <>
-                {val} <span style={{ color: '#f20' }}>( {record.children.length} )</span>
+                <Tag color="volcano">
+                  {val} <span style={{ color: '#f20' }}>( {record.children.length} )</span>
+                </Tag>
               </>
             );
           }
@@ -86,10 +119,10 @@ const ProjectTask = (props: IProjectTaskProps) => {
         dataKey: 'assignee',
         width: 65,
         sortable: true,
-        render: (val: string) => {
+        render: (val: string, record: any) => {
           if (val) {
-            return val.split(',').map((it) => (
-              <Tag key={it} color="#f50">
+            return val.split(',').map((it, idx) => (
+              <Tag key={it} color={record.assignee_color.split(',')[idx]}>
                 {it}
               </Tag>
             ));
@@ -131,38 +164,63 @@ const ProjectTask = (props: IProjectTaskProps) => {
     return res;
   }, []);
 
+  const onVisibleChange = (newVisible: boolean) => {
+    setVisible(newVisible);
+  };
+
   return (
     <>
       <div className="pb-2">
         <Button type="primary">新建</Button>
+        <Popover
+          placement="bottom"
+          content={
+            <GroupSetting
+              groupBy={columns.map((it) => {
+                return { label: it.title, value: it.dataKey };
+              })}
+              onFinish={(data: any[]) => {
+                console.log('data', data);
+                setGroupSetting([...data]);
+                setVisible(false);
+              }}
+            />
+          }
+          trigger="click"
+          visible={visible}
+          onVisibleChange={onVisibleChange}
+        >
+          <Button style={{ marginLeft: '10px' }} type="dashed">
+            {groupSetting.length > 0 ? `${groupSetting.length}个分组` : '设置分组'}
+          </Button>
+        </Popover>
       </div>
       <div style={{ height: 'calc(100% - 40px)' }}>
         <Table
-          rowHeight={40}
           columns={columns}
-          dataSource={list}
+          dataSource={groupList || list}
           autoIndex={false}
           rowKey="id"
           expandColumnKey="name"
           defaultExpandAllRows={true}
-          // expandedRowKeys={expandedRowKeys}
+          expandedRowKeys={expandedRowKeys}
           // onColumnSort={onColumnSort}
           // sortState={{ [sortColumn.key]: sortColumn.order } as any}
           onRowExpand={(args: { expanded: boolean; rowData: any; rowIndex: number; rowKey: any }) => {
-            // const record = args.rowData;
-            // if (args.expanded) {
-            //   const _expandedRowKeys = expandedRowKeys;
-            //   _expandedRowKeys.push(record._rowKey_);
-            //   setExpandedRowKeys([...expandedRowKeys]);
-            // } else {
-            //   const _expandedRowKeys = expandedRowKeys;
-            //   const data = _expandedRowKeys.filter((it) => it !== record._rowKey_);
-            //   setExpandedRowKeys([...data]);
-            // }
+            const record = args.rowData;
+            if (args.expanded) {
+              const _expandedRowKeys = expandedRowKeys;
+              _expandedRowKeys.push(record.id);
+              setExpandedRowKeys([...expandedRowKeys]);
+            } else {
+              const _expandedRowKeys = expandedRowKeys;
+              const data = _expandedRowKeys.filter((it) => it !== record.id);
+              setExpandedRowKeys([...data]);
+            }
           }}
           // rowRenderer={onRowRenderer}
           rowClassName={(args: any) => {
-            console.log('rowClassName', args);
+            // console.log('rowClassName', args);
 
             // const _rowData = args.rowData;
 

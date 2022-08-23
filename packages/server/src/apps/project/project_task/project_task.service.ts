@@ -1,7 +1,7 @@
 /*
  * @Author: wangxian
  * @Date: 2022-08-22 16:45:19
- * @LastEditTime: 2022-08-22 17:11:27
+ * @LastEditTime: 2022-08-23 09:21:52
  */
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';

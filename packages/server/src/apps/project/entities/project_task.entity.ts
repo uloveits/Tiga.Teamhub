@@ -1,7 +1,7 @@
 /*
  * @Author: wangxian
  * @Date: 2022-08-18 10:10:48
- * @LastEditTime: 2022-08-22 17:02:48
+ * @LastEditTime: 2022-08-23 09:20:22
  */
 import {
   Entity,
@@ -42,6 +42,14 @@ export class ProjectTask {
 
   @Column({ type: 'varchar', name: 'assignee', length: 255, nullable: true })
   public assignee!: string;
+
+  @Column({
+    type: 'varchar',
+    name: 'assignee_color',
+    length: 255,
+    nullable: true,
+  })
+  public assignee_color!: string;
 
   @Column({ type: 'varchar', name: 'iteration', length: 10 })
   public iteration!: string;
