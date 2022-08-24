@@ -186,3 +186,11 @@ export function recursiveGrouping(array: any[], keys: string[], by = 'name', ind
   }
   return { data: temp, id };
 }
+
+export function getMax(arr: number[]) {
+  return Math.max(...arr);
+}
+
+export function getMin(arr: number[]) {
+  return Math.min(...arr);
+}

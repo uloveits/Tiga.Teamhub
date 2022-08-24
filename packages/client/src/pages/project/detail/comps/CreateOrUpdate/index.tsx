@@ -1,74 +1,40 @@
 /*
  * @Author: wangxian
- * @Date: 2022-08-04 19:32:02
- * @LastEditTime: 2022-08-24 11:17:48
+ * @Date: 2022-08-24 11:12:40
+ * @LastEditTime: 2022-08-24 13:38:58
  */
-import { Button, message } from 'antd';
+
 import { FormInstance } from 'antd/lib/form';
 import React from 'react';
-import { Modal } from 'ronds-react-ui';
 import { MetadataForm } from 'ronds-metadata';
-import ProjectApi from '@/api/ProjectApi';
-import ProjectCardList from './comps/ProjectCardList';
+import { Modal } from 'ronds-react-ui';
 
-const ProjectList = () => {
-  const [isModal, setIsModal] = React.useState<boolean>(false);
-
-  const [list, setList] = React.useState<any[]>([]);
+interface ICreateOrUpdateProps {
+  isModal: boolean;
+  onCancel: () => void;
+}
+const CreateOrUpdateModal = (props: ICreateOrUpdateProps) => {
+  const { isModal, onCancel } = props;
 
   const formRef = React.useRef<FormInstance>();
 
-  const getMyProjectList = React.useCallback(() => {
-    ProjectApi.getMyProjectList().then((res) => {
-      if (res.successed) {
-        console.log('getMyProjectList', res);
-        setList([...res.data]);
-      }
-    });
-  }, []);
-
-  React.useEffect(() => {
-    getMyProjectList();
-  }, [getMyProjectList]);
-
   const onFinish = async (values: any) => {
     console.log('onFinsi', values);
-    const res = await ProjectApi.saveProject(values);
-    if (res.successed) {
-      message.success('创建成功');
-      getMyProjectList();
-      setIsModal(false);
-    }
   };
 
   return (
     <>
-      <Button
-        type="primary"
-        onClick={() => {
-          setIsModal(true);
-        }}
-      >
-        新建
-      </Button>
-
-      <div className="mt-2" style={{ height: 'calc(100% - 40px)' }}>
-        <ProjectCardList list={list} />
-      </div>
-
       <Modal
         visible={isModal}
-        onCancel={() => {
-          setIsModal(false);
-        }}
+        onCancel={onCancel}
         onOk={() => {
           if (formRef.current) formRef.current.submit();
         }}
-        title={'创建项目'}
+        title={'添加任务'}
         canMaximize={true}
         itemState={{
           width: 600,
-          height: 400,
+          height: 700,
         }}
       >
         <div style={{ width: '100%', height: '100%' }}>
@@ -85,8 +51,8 @@ const ProjectList = () => {
     </>
   );
 };
-export default ProjectList;
 
+export default CreateOrUpdateModal;
 const ADD_SCHEMA = [
   {
     id: 'Test',

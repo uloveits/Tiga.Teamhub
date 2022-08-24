@@ -1,7 +1,7 @@
 /*
  * @Author: wangxian
  * @Date: 2022-08-15 14:15:32
- * @LastEditTime: 2022-08-23 15:32:31
+ * @LastEditTime: 2022-08-24 10:38:36
  */
 
 import { MinusCircleOutlined, PlusCircleOutlined } from '@ant-design/icons';
@@ -10,12 +10,13 @@ import React from 'react';
 import './index.less';
 
 interface IGroupSettingProps {
+  value: any[];
   groupBy: any[];
   onFinish?: (data: any[]) => void;
 }
 
 const GroupSetting = (props: IGroupSettingProps) => {
-  const { groupBy, onFinish } = props;
+  const { value, groupBy, onFinish } = props;
   console.log('GroupSetting===', groupBy);
 
   const [groupOpts, setGroupOpts] = React.useState<{ label: string; value: string }[]>([]);
@@ -26,6 +27,10 @@ const GroupSetting = (props: IGroupSettingProps) => {
     setGroupOpts([...groupBy]);
   }, [groupBy]);
 
+  React.useEffect(() => {
+    setGroupList([...value]);
+    groupListRef.current = value;
+  }, [value]);
   const ORDER_TYPE = [
     { label: tr('选项正序'), value: 'ASC' },
     { label: tr('选项倒序'), value: 'DESC' },
@@ -45,16 +50,16 @@ const GroupSetting = (props: IGroupSettingProps) => {
     groupListRef.current = _groupList;
   };
 
-  const onSelectOrder = (idx: number, value: string) => {
+  const onSelectOrder = (idx: number, _value: string) => {
     const _groupList = groupListRef.current;
-    _groupList[idx].order = _groupList[idx].order === value ? '' : value;
+    _groupList[idx].order = _groupList[idx].order === _value ? '' : _value;
     setGroupList([..._groupList]);
     groupListRef.current = _groupList;
   };
 
-  const onSelectChange = (value: string, idx: number) => {
+  const onSelectChange = (_value: string, idx: number) => {
     const _groupList = groupListRef.current;
-    _groupList[idx].name = value;
+    _groupList[idx].name = _value;
     setGroupList([..._groupList]);
     groupListRef.current = _groupList;
   };
@@ -73,8 +78,8 @@ const GroupSetting = (props: IGroupSettingProps) => {
             style={{ width: '120px' }}
             allowClear
             placeholder={tr('选择分组方式')}
-            onChange={(value: string) => {
-              onSelectChange(value, idx);
+            onChange={(_value: string) => {
+              onSelectChange(_value, idx);
             }}
             showSearch
             filterOption={(input: string, option: any) => {

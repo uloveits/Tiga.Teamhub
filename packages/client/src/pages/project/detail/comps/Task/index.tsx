@@ -9,6 +9,7 @@ import { recursiveGrouping } from '@/utils';
 import { Button, Popover, Tag } from 'antd';
 import React from 'react';
 import { Table } from 'ronds-react-ui';
+import CreateOrUpdateModal from '../CreateOrUpdate';
 import GroupSetting from './comps/GroupSetting';
 
 interface IProjectTaskProps {
@@ -21,8 +22,9 @@ const ProjectTask = (props: IProjectTaskProps) => {
   const [groupList, setGroupList] = React.useState<any[]>();
 
   const [visible, setVisible] = React.useState<boolean>(false);
+  const [isModal, setIsModal] = React.useState<boolean>(false);
 
-  const [groupSetting, setGroupSetting] = React.useState<{ name: string; order: string }[]>([]);
+  const [groupSetting, setGroupSetting] = React.useState<{ name: string; order: string }[]>([{ name: 'stage', order: 'ASC' }]);
   const [expandedRowKeys, setExpandedRowKeys] = React.useState<string[]>([]);
 
   const getTaskList = React.useCallback(async () => {
@@ -171,11 +173,19 @@ const ProjectTask = (props: IProjectTaskProps) => {
   return (
     <>
       <div className="pb-2">
-        <Button type="primary">新建</Button>
+        <Button
+          type="primary"
+          onClick={() => {
+            setIsModal(true);
+          }}
+        >
+          新建
+        </Button>
         <Popover
           placement="bottom"
           content={
             <GroupSetting
+              value={groupSetting}
               groupBy={columns.map((it) => {
                 return { label: it.title, value: it.dataKey };
               })}
@@ -240,6 +250,12 @@ const ProjectTask = (props: IProjectTaskProps) => {
           }}
         />
       </div>
+      <CreateOrUpdateModal
+        isModal={isModal}
+        onCancel={() => {
+          setIsModal(false);
+        }}
+      />
     </>
   );
 };
