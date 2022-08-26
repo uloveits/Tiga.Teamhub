@@ -1,7 +1,7 @@
 /*
  * @Author: wangxian
  * @Date: 2022-08-22 15:25:02
- * @LastEditTime: 2022-08-22 17:12:29
+ * @LastEditTime: 2022-08-25 18:03:21
  */
 import {
   Body,
@@ -13,7 +13,6 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { CreateProjectTaskDto } from '../dto/create-project-task.dto';
 import { Request } from 'express';
 import { ProjectTaskService } from './project_task.service';
 
@@ -31,7 +30,7 @@ export class ProjectTaskController {
   @Post(':projectId')
   create(
     @Param('projectId') projectId: number,
-    @Body() body: CreateProjectTaskDto,
+    @Body() body: any,
     @Req() request: Request,
   ) {
     return this.projectTaskService.create(
@@ -50,5 +49,46 @@ export class ProjectTaskController {
   @Post(':projectId/list')
   findAll(@Param('projectId') projectId: number) {
     return this.projectTaskService.findAll(projectId);
+  }
+
+  /**
+   * 获取任务子任务列表
+   * @param request
+   * @returns
+   */
+  @UseGuards(AuthGuard('jwt'))
+  @Get('sub/:taskId/list')
+  findTaskChildren(@Param('taskId') taskId: number) {
+    return this.projectTaskService.findTaskChildren(taskId);
+  }
+
+  /**
+   * 获取任务详情
+   * @param request
+   * @returns
+   */
+  @UseGuards(AuthGuard('jwt'))
+  @Get(':taskId')
+  getTaskDetail(@Param('taskId') taskId: number) {
+    return this.projectTaskService.getTaskDetail(taskId);
+  }
+
+  /**
+   * 添加项目描述
+   * @param request
+   * @returns
+   */
+  @UseGuards(AuthGuard('jwt'))
+  @Post(':taskId/des')
+  addTaskDes(
+    @Param('taskId') taskId: number,
+    @Body() body: any,
+    @Req() request: Request,
+  ) {
+    return this.projectTaskService.addTaskDes(
+      taskId,
+      body,
+      (request as any).user,
+    );
   }
 }

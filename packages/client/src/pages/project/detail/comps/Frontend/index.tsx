@@ -1,7 +1,7 @@
 /*
  * @Author: wangxian
  * @Date: 2022-08-20 09:46:19
- * @LastEditTime: 2022-08-23 09:17:34
+ * @LastEditTime: 2022-08-25 12:06:00
  */
 import ProjectApi from '@/api/ProjectApi';
 import FrontendBoard from '@/comps/FrontendBoard';
@@ -11,7 +11,7 @@ import React from 'react';
 import { FBoard } from '@/comps/FrontendBoard/interface';
 
 interface IProjectFrontendProps {
-  projectId: number;
+  projectId?: number;
 }
 
 const ProjectFrontend = (props: IProjectFrontendProps) => {
@@ -43,7 +43,9 @@ const ProjectFrontend = (props: IProjectFrontendProps) => {
   }, [projectId, processListData2Board]);
 
   React.useEffect(() => {
-    getTaskList();
+    if (projectId) {
+      getTaskList();
+    }
   }, [projectId, getTaskList]);
 
   console.log(list);

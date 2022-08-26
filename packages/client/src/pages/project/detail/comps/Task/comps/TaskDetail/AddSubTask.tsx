@@ -1,7 +1,7 @@
 /*
  * @Author: wangxian
  * @Date: 2022-08-24 11:12:40
- * @LastEditTime: 2022-08-25 12:07:15
+ * @LastEditTime: 2022-08-25 18:52:11
  */
 
 import ProjectApi from '@/api/ProjectApi';
@@ -11,31 +11,31 @@ import moment from 'moment';
 import React from 'react';
 import { MetadataForm } from 'ronds-metadata';
 import { Modal } from 'ronds-react-ui';
-import { TASK_CLASSIFICATION_ENUM, TASK_STAGE_ENUM } from '../../constants';
 
-interface ICreateOrUpdateProps {
-  projectId?: number;
+interface IAddSubTaskModalProps {
+  info?: any;
+  taskId?: number;
   isModal: boolean;
   onCancel?: () => void;
   onSuccess?: () => void;
 }
-const CreateOrUpdateModal = (props: ICreateOrUpdateProps) => {
-  const { projectId, isModal, onCancel, onSuccess } = props;
+const AddSubTaskModal = (props: IAddSubTaskModalProps) => {
+  const { info, taskId, isModal, onCancel, onSuccess } = props;
 
   const [member, setMember] = React.useState<any[]>([]);
 
   const formRef = React.useRef<FormInstance>();
 
   React.useEffect(() => {
-    if (projectId) {
-      ProjectApi.getProjectMemberList(projectId).then((res) => {
+    if (info?.project_id) {
+      ProjectApi.getProjectMemberList(info.project_id).then((res) => {
         if (res.successed) {
           console.log('getProjectMemberList', res);
           setMember([...res.data]);
         }
       });
     }
-  }, [projectId]);
+  }, [info?.project_id]);
 
   const getAssigneeColor = (_assignee: string[]) => {
     return _assignee.map((it) => {
@@ -46,15 +46,17 @@ const CreateOrUpdateModal = (props: ICreateOrUpdateProps) => {
 
   const onFinish = async (values: any) => {
     console.log('onFinsi', values);
-    const assignee_color = getAssigneeColor(values.assignee);
+    const assignee_color = getAssigneeColor([values.assignee]);
     const param = {
-      projectId,
+      ...info,
       ...values,
+      pid: taskId,
+      projectId: info.project_id,
       startTime: moment(values.startTime).format('YYYY/MM/DD'),
       endTime: moment(values.endTime).format('YYYY/MM/DD'),
-      assignee: values.assignee.toString(),
-      assignee_color: assignee_color.toString(),
+      assignee_color: assignee_color[0],
     };
+    delete param.id;
     const res = await ProjectApi.saveProjectTask(param);
     if (res.successed) {
       message.success('创建成功');
@@ -70,11 +72,11 @@ const CreateOrUpdateModal = (props: ICreateOrUpdateProps) => {
         onOk={() => {
           if (formRef.current) formRef.current.submit();
         }}
-        title={'添加任务'}
+        title={'添加子任务'}
         canMaximize={true}
         itemState={{
           width: 600,
-          height: 700,
+          height: 450,
         }}
       >
         <div style={{ width: '100%', height: '100%' }}>
@@ -97,7 +99,7 @@ const CreateOrUpdateModal = (props: ICreateOrUpdateProps) => {
   );
 };
 
-export default CreateOrUpdateModal;
+export default AddSubTaskModal;
 const ADD_SCHEMA = [
   {
     id: 'Test',
@@ -113,25 +115,7 @@ const ADD_SCHEMA = [
             type: 'ref',
             value: {
               common: {
-                label: '任务名称',
-                require: true,
-              },
-            },
-          },
-        ],
-      },
-      {
-        id: 'stage',
-        type: 'enum',
-        enum: TASK_STAGE_ENUM,
-        fields: [
-          {
-            id: 'Rule.Form',
-            refId: 'com.ronds.schema.default.Rule.Form',
-            type: 'ref',
-            value: {
-              common: {
-                label: '阶段',
+                label: '名称',
                 require: true,
               },
             },
@@ -148,7 +132,7 @@ const ADD_SCHEMA = [
             id: 'Rule.Form',
             value: {
               common: {
-                label: '完成率',
+                label: '权重',
                 require: true,
               },
             },
@@ -205,43 +189,7 @@ const ADD_SCHEMA = [
             id: 'Rule.Form',
             value: {
               common: {
-                label: '责任人',
-                require: true,
-              },
-              enum: { isMutiple: true },
-            },
-          },
-        ],
-      },
-      {
-        id: 'iteration',
-        type: 'text',
-        fields: [
-          {
-            type: 'ref',
-            refId: 'com.ronds.schema.default.Rule.Form',
-            id: 'Rule.Form',
-            value: {
-              common: {
-                label: '迭代周',
-                require: true,
-              },
-            },
-          },
-        ],
-      },
-      {
-        id: 'classification',
-        type: 'enum',
-        enum: TASK_CLASSIFICATION_ENUM,
-        fields: [
-          {
-            type: 'ref',
-            refId: 'com.ronds.schema.default.Rule.Form',
-            id: 'Rule.Form',
-            value: {
-              common: {
-                label: '功能分类',
+                label: '经办人',
                 require: true,
               },
             },

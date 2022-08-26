@@ -19,6 +19,7 @@
     "@types/lodash": "^4.14.172",
     "@types/markdown-it": "^12.2.3",
     "@types/markdown-it-emoji": "^2.0.2",
+    "@uiw/react-md-editor": "^3.18.1",
     "animate.css": "^4.1.1",
     "antd": "^4.7.3",
     "antd-dayjs-webpack-plugin": "^1.0.1",

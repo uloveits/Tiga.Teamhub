@@ -1,10 +1,11 @@
 /*
  * @Author: wangxian
  * @Date: 2022-08-19 18:51:17
- * @LastEditTime: 2022-08-20 11:46:24
+ * @LastEditTime: 2022-08-25 18:44:09
  */
 
 import { Avatar, Empty } from 'antd';
+import moment from 'moment';
 
 interface IProjectCardListProps {
   list: any[];
@@ -22,7 +23,7 @@ const ProjectCardList = (props: IProjectCardListProps) => {
                 className="drop-shadow-sm rounded p-2 mb-2 flex gap-4 items-center cursor-pointer"
                 style={{ background: '#fff', border: '1px solid #E5E6EB' }}
                 onClick={() => {
-                  window.location.href = `/#/project/detail?id=${it.id}&name=${it.name}`;
+                  window.location.href = `/#/project/detail?id=${it.id}&name=${encodeURI(encodeURI(it.name))}`;
                 }}
                 role="button"
               >
@@ -45,11 +46,11 @@ const ProjectCardList = (props: IProjectCardListProps) => {
                 </div>
                 <div className="mr-10">
                   <div className="text-gray-900">{tr('更新时间')}</div>
-                  <div className="text-gray-500 text-xs">{it.update_time}</div>
+                  <div className="text-gray-500 text-xs">{moment(it.update_time).format('yyyy-MM-dd HH:mm:ss')}</div>
                 </div>
                 <div className="mr-10">
                   <div className="text-gray-900">{tr('创建时间')}</div>
-                  <div className="text-gray-500 text-xs">{it.create_time}</div>
+                  <div className="text-gray-500 text-xs">{moment(it.create_time).format('yyyy-MM-dd HH:mm:ss')}</div>
                 </div>
               </div>
             ))}

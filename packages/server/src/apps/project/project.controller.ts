@@ -1,7 +1,7 @@
 /*
  * @Author: wangxian
  * @Date: 2022-08-18 18:07:57
- * @LastEditTime: 2022-08-22 17:08:40
+ * @LastEditTime: 2022-08-25 08:50:55
  */
 import {
   Controller,
@@ -60,6 +60,17 @@ export class ProjectController {
   @Post('member/update')
   updateMember(@Body() body: UpdateProjectMemberDto) {
     return this.projectService.updateMember(body);
+  }
+
+  /**
+   * 更新项目成员信息
+   * @param id
+   * @returns
+   */
+  @UseGuards(AuthGuard('jwt'))
+  @Get(':projectId/member/list')
+  getMember(@Param('projectId') projectId: number) {
+    return this.projectService.getMember(projectId);
   }
 
   @Get(':id')

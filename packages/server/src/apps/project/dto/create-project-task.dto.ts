@@ -1,13 +1,17 @@
 /*
  * @Author: wangxian
  * @Date: 2022-08-18 18:07:57
- * @LastEditTime: 2022-08-23 09:21:14
+ * @LastEditTime: 2022-08-25 16:52:00
  */
 import { IsNotEmpty } from 'class-validator';
 
 export class CreateProjectTaskDto {
   @IsNotEmpty()
   public name: string;
+
+  public pid: number;
+
+  public completeRate: number;
 
   public project_id: number;
 

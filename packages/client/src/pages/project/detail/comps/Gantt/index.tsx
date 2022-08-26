@@ -1,7 +1,7 @@
 /*
  * @Author: wangxian
  * @Date: 2022-08-20 09:46:19
- * @LastEditTime: 2022-08-24 10:12:45
+ * @LastEditTime: 2022-08-25 12:06:31
  */
 import ProjectApi from '@/api/ProjectApi';
 import GanttChart from '@/comps/Charts/GanttChart';
@@ -11,7 +11,7 @@ import { getMax, getMin, handleSameTypeList } from '@/utils';
 import moment from 'moment';
 
 interface IProjectGanttProps {
-  projectId: number;
+  projectId?: number;
 }
 const ProjectGantt = (props: IProjectGanttProps) => {
   const { projectId } = props;
@@ -73,7 +73,9 @@ const ProjectGantt = (props: IProjectGanttProps) => {
   }, [projectId, processListData2Gantt]);
 
   React.useEffect(() => {
-    getTaskList();
+    if (projectId) {
+      getTaskList();
+    }
   }, [projectId, getTaskList]);
 
   return (

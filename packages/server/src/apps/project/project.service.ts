@@ -2,7 +2,7 @@ import { UpdateProjectMemberDto } from './dto/update-project-member.dto';
 /*
  * @Author: wangxian
  * @Date: 2022-08-18 18:07:57
- * @LastEditTime: 2022-08-20 08:38:16
+ * @LastEditTime: 2022-08-25 08:49:55
  */
 import { Project } from './entities/project.entity';
 import { Injectable } from '@nestjs/common';
@@ -77,6 +77,14 @@ export class ProjectService {
     }
 
     return true;
+  }
+
+  async getMember(id: number) {
+    const findProjectUserSql = `select U.id, U.account, U.username, U.color, PU."isManaged" 
+                                    from project_user PU 
+                                    left join "user" U on PU.user_id = U.id 
+                                    where U."isDeleted" = false and PU.project_id = ${id}`;
+    return this.repository.query(findProjectUserSql);
   }
 
   findOne(id: number) {

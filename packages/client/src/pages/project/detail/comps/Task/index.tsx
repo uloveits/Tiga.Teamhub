@@ -13,10 +13,11 @@ import CreateOrUpdateModal from '../CreateOrUpdate';
 import GroupSetting from './comps/GroupSetting';
 
 interface IProjectTaskProps {
-  projectId: number;
+  projectId?: number;
+  onChange?: (data: any) => void;
 }
 const ProjectTask = (props: IProjectTaskProps) => {
-  const { projectId } = props;
+  const { projectId, onChange } = props;
 
   const [list, setList] = React.useState<any[]>([]);
   const [groupList, setGroupList] = React.useState<any[]>();
@@ -37,7 +38,9 @@ const ProjectTask = (props: IProjectTaskProps) => {
   }, [projectId]);
 
   React.useEffect(() => {
-    getTaskList();
+    if (projectId) {
+      getTaskList();
+    }
   }, [projectId, getTaskList]);
 
   const onProcessData2Group = React.useCallback((groups: { name: string; order: string }[], data: any[]) => {
@@ -87,7 +90,16 @@ const ProjectTask = (props: IProjectTaskProps) => {
               </>
             );
           }
-          return val;
+          return (
+            <Button
+              type="link"
+              onClick={() => {
+                onChange && onChange({ key: 'project:task:detail:{id}', name: val, props: { id: record.id } });
+              }}
+            >
+              {val}
+            </Button>
+          );
         },
       },
       {
@@ -164,7 +176,7 @@ const ProjectTask = (props: IProjectTaskProps) => {
     ];
 
     return res;
-  }, []);
+  }, [onChange]);
 
   const onVisibleChange = (newVisible: boolean) => {
     setVisible(newVisible);
@@ -251,8 +263,13 @@ const ProjectTask = (props: IProjectTaskProps) => {
         />
       </div>
       <CreateOrUpdateModal
+        projectId={projectId}
         isModal={isModal}
         onCancel={() => {
+          setIsModal(false);
+        }}
+        onSuccess={() => {
+          getTaskList();
           setIsModal(false);
         }}
       />
