@@ -1,10 +1,11 @@
 /*
  * @Author: wangxian
  * @Date: 2022-08-26 16:45:37
- * @LastEditTime: 2022-08-27 10:29:12
+ * @LastEditTime: 2022-08-29 09:52:43
  */
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { HashRouter } from "react-router-dom";
 import "./index.css";
 import "./public/tailwind/output.css";
 import App from "./App";
@@ -15,7 +16,9 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <HashRouter>
+      <App />
+    </HashRouter>
   </React.StrictMode>
 );
 

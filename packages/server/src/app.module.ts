@@ -11,6 +11,7 @@ import { UserModule } from './apps/user/user.module';
 import { AuthModule } from './apps/auth/auth.module';
 import { UserController } from './apps/user/user.controller';
 import { ProjectModule } from './apps/project/project.module';
+import { DocsModule } from './apps/docs/docs.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { ProjectModule } from './apps/project/project.module';
     UserModule,
     AuthModule,
     ProjectModule,
+    DocsModule,
   ],
   controllers: [UserController],
   providers: [],

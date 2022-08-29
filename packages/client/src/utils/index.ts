@@ -194,3 +194,28 @@ export function getMax(arr: number[]) {
 export function getMin(arr: number[]) {
   return Math.min(...arr);
 }
+
+/**
+ * 生成tree
+ * @param pid 父id
+ */
+export function toTree(array: any[], pid: number = -1): any[] {
+  const child = array.filter((it) => it.pid === pid);
+
+  return child.map((it: any) => {
+    const _children = array.filter((c) => c.pid === it.id);
+
+    if (_children.length > 0) {
+      return {
+        key: it.id,
+        label: it.name,
+        children: toTree(array, it.id),
+      };
+    }
+
+    return {
+      key: it.id,
+      label: it.name,
+    };
+  });
+}

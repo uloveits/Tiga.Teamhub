@@ -1,7 +1,7 @@
 /*
  * @Author: wangxian
  * @Date: 2022-08-22 15:25:02
- * @LastEditTime: 2022-08-25 18:03:21
+ * @LastEditTime: 2022-08-29 11:43:06
  */
 import {
   Body,
@@ -13,9 +13,11 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { Request } from 'express';
 import { ProjectTaskService } from './project_task.service';
-
+@ApiBearerAuth()
+@ApiTags('项目任务管理')
 @Controller('project/task')
 export class ProjectTaskController {
   constructor(private readonly projectTaskService: ProjectTaskService) {}
