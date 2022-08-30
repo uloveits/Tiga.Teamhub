@@ -1,7 +1,7 @@
 /*
  * @Author: wangxian
  * @Date: 2022-03-01 09:16:39
- * @LastEditTime: 2022-08-29 16:57:19
+ * @LastEditTime: 2022-08-30 11:50:13
  */
 import baseHttp from '@/utils/request';
 
@@ -27,6 +27,15 @@ export default class DocApi {
   }
 
   /**
+   * 获取文档种类
+   * @param input
+   */
+  static getDocTypes() {
+    const api = '/api/docs/types';
+    return HttpClient.fetch<any>(api, { method: 'get' });
+  }
+
+  /**
    * 保存文档
    * @param input
    */
@@ -42,5 +51,14 @@ export default class DocApi {
   static getDocContent(id: number) {
     const api = `/api/docs/content/${id}`;
     return HttpClient.fetch<any>(api, { method: 'get' });
+  }
+
+  /**
+   * 保存文档目录
+   * @param input
+   */
+  static saveDocs(data: any) {
+    const api = '/api/docs';
+    return HttpClient.fetch<any>(api, { method: 'post', data });
   }
 }

@@ -2484,30 +2484,10 @@
   resolved "https://registry.yarnpkg.com/@types/json5/-/json5-0.0.29.tgz#ee28707ae94e11d2b827bcbe5270bcea7f3e71ee"
   integrity sha1-7ihweulOEdK4J7y+UnC86n8+ce4=
 
-"@types/linkify-it@*":
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/@types/linkify-it/-/linkify-it-3.0.2.tgz#fd2cd2edbaa7eaac7e7f3c1748b52a19143846c9"
-  integrity sha512-HZQYqbiFVWufzCwexrvh694SOim8z2d+xJl5UNamcvQFejLY/2YUtzXHYi3cHdI7PMlS8ejH2slRAOJQ32aNbA==
-
 "@types/lodash@^4.14.172":
   version "4.14.172"
   resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.172.tgz#aad774c28e7bfd7a67de25408e03ee5a8c3d028a"
   integrity sha512-/BHF5HAx3em7/KkzVKm3LrsD6HZAXuXO1AJZQ3cRRBZj4oHZDviWPYu0aEplAqDFNHZPW6d3G7KN+ONcCCC7pw==
-
-"@types/markdown-it-emoji@^2.0.2":
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/@types/markdown-it-emoji/-/markdown-it-emoji-2.0.2.tgz#f12a97df2758f38b4b38f277b468780459faff14"
-  integrity sha512-2ln8Wjbcj/0oRi/6VnuMeWEHHuK8uapFttvcLmDIe1GKCsFBLOLBX+D+xhDa9oWOQV0IpvxwrSfKKssAqqroog==
-  dependencies:
-    "@types/markdown-it" "*"
-
-"@types/markdown-it@*", "@types/markdown-it@^12.2.3":
-  version "12.2.3"
-  resolved "https://registry.yarnpkg.com/@types/markdown-it/-/markdown-it-12.2.3.tgz#0d6f6e5e413f8daaa26522904597be3d6cd93b51"
-  integrity sha512-GKMHFfv3458yYy+v/N8gjufHO6MSZKCOXpZc5GXIWWy8uldwfmPn98vp81gZ5f9SVw8YYBctgfJ22a2d7AOMeQ==
-  dependencies:
-    "@types/linkify-it" "*"
-    "@types/mdurl" "*"
 
 "@types/markdown-navbar@^1.4.0":
   version "1.4.0"
@@ -2523,7 +2503,7 @@
   dependencies:
     "@types/unist" "*"
 
-"@types/mdurl@*", "@types/mdurl@^1.0.0":
+"@types/mdurl@^1.0.0":
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/@types/mdurl/-/mdurl-1.0.2.tgz#e2ce9d83a613bacf284c7be7d491945e39e1f8e9"
   integrity sha512-eC4U9MlIcu2q0KQmXszyn5Akca/0jrQmwDRgpAMJai7qBWq4amIQhZyNau4VYGtCeALvW1/NtjzJJ567aZxfKA==
@@ -14472,33 +14452,38 @@ ronds-graph-chart-phm@^1.0.5:
     wasm-feature-detect "^1.2.11"
     wavefile "^11.0.0"
 
-ronds-metadata@^1.1.33:
-  version "1.1.33"
-  resolved "https://registry.yarnpkg.com/ronds-metadata/-/ronds-metadata-1.1.33.tgz#41ab978b06c9157e45bc0099d9275ddf38319491"
-  integrity sha512-lPgoDN5brPvgxXCqk+fwvFA9eoBABUtiB81sLxGVygGRx0DmeUYO7JQ4Ml0msafhdkj2joQxbFaTt7MZRmucNg==
+ronds-metadata@^1.1.36:
+  version "1.1.36"
+  resolved "https://registry.yarnpkg.com/ronds-metadata/-/ronds-metadata-1.1.36.tgz#b5b20414cc7cc5ba42f2407c5da4c7e5091128b3"
+  integrity sha512-GJcY+1yX63Hv3Am1EAmMeriBAyaip7tfJrdgpG6yuaNJtZF7VOLIay6HsxhrT6QbZThydbv+yvPwqlWbgAw8vg==
   dependencies:
     "@antv/x6" "^1.32.2"
     "@antv/x6-react-shape" "^1.6.0"
     "@babel/helper-create-regexp-features-plugin" "^7.12.13"
     "@babel/runtime" "^7.11.2"
     "@popperjs/core" "^2.4.4"
+    "@types/markdown-navbar" "^1.4.0"
     ahooks "^3.4.0"
     axios "^0.21.4"
     babel-plugin-import "^1.13.3"
     babel-plugin-transform-remove-console "^6.9.4"
     bl "^5.0.0"
     codemirror "^5.63.0"
+    github-markdown-css "^5.1.0"
     highlight.js "11.3.1"
     immer "^9.0.14"
     lodash "^4.17.21"
     markdown-it "^12.3.2"
     markdown-it-emoji "^2.0.0"
+    markdown-navbar "^1.4.3"
     qs "^6.10.1"
     react "^17.0.2"
     react-dnd "^11.1.3"
     react-dnd-html5-backend "^11.1.3"
+    react-markdown "^8.0.3"
     react-markdown-editor-lite "^1.3.2"
     react-popper "^2.2.3"
+    remark-gfm "^3.0.1"
     rxjs "^7.5.4"
 
 ronds-react-ui@1.1.10:

@@ -1,7 +1,7 @@
 /*
  * @Author: wangxian
  * @Date: 2022-08-16 19:00:58
- * @LastEditTime: 2022-08-18 15:26:18
+ * @LastEditTime: 2022-08-29 19:17:24
  */
 import { ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
@@ -16,6 +16,9 @@ async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
   const config: ConfigService = app.get(ConfigService);
   const port: number = config.get<number>('PORT');
+
+  // 配置静态资源目录
+  app.useStaticAssets('public');
 
   app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
 

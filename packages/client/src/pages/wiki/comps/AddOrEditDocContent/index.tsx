@@ -1,10 +1,11 @@
 /*
  * @Author: wangxian
  * @Date: 2022-08-24 11:12:40
- * @LastEditTime: 2022-08-29 17:22:47
+ * @LastEditTime: 2022-08-30 18:56:28
  */
 
 import DocApi from '@/api/DocApi';
+import FileApi from '@/api/FileApi';
 import { message } from 'antd';
 import React from 'react';
 import MdEdit from 'ronds-metadata/es/comps/MdEdit';
@@ -42,6 +43,18 @@ const AddOrEditDocContentModal = (props: IAddTaskDesModalProps) => {
       onSuccess && onSuccess();
     }
   };
+
+  const onImageUpload = (file: File, callback: (url: string) => void) => {
+    console.log('onImageUpload', file);
+    return new Promise((resolve) => {
+      FileApi.upload(file).then((res) => {
+        if (res.successed) {
+          callback(`${res.data.host}${res.data.path}`);
+        }
+      });
+    });
+  };
+
   return (
     <>
       <Modal
@@ -56,7 +69,7 @@ const AddOrEditDocContentModal = (props: IAddTaskDesModalProps) => {
         }}
       >
         <div style={{ width: '100%', height: '100%' }}>
-          <MdEdit value={value} onChange={onEditChange} />
+          <MdEdit value={value} onChange={onEditChange} onImageUpload={onImageUpload} />
         </div>
       </Modal>
     </>

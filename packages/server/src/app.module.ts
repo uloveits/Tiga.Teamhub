@@ -1,7 +1,7 @@
 /*
  * @Author: wangxian
  * @Date: 2022-08-16 19:00:58
- * @LastEditTime: 2022-08-18 16:56:48
+ * @LastEditTime: 2022-08-29 19:18:27
  */
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -12,6 +12,7 @@ import { AuthModule } from './apps/auth/auth.module';
 import { UserController } from './apps/user/user.controller';
 import { ProjectModule } from './apps/project/project.module';
 import { DocsModule } from './apps/docs/docs.module';
+import { FilesModule } from './apps/files/files.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { DocsModule } from './apps/docs/docs.module';
     AuthModule,
     ProjectModule,
     DocsModule,
+    FilesModule,
   ],
   controllers: [UserController],
   providers: [],

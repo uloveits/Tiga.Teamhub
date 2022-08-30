@@ -1,13 +1,14 @@
 /*
  * @Author: wangxian
  * @Date: 2021-12-16 09:52:04
- * @LastEditTime: 2022-02-11 13:43:26
+ * @LastEditTime: 2022-08-29 19:36:11
  */
 import DingTalkApi from '@/api/DingTalkApi';
 import MeetingApi from '@/api/MeetingApi';
-import MdEdit from '@/comps/MdEdit';
+
 import { Button, message, Popover, Select } from 'antd';
 import React from 'react';
+import MdEdit from 'ronds-metadata/es/comps/MdEdit';
 
 const { Option } = Select;
 

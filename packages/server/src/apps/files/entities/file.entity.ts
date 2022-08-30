@@ -1,7 +1,7 @@
 /*
  * @Author: wangxian
  * @Date: 2022-08-18 10:10:48
- * @LastEditTime: 2022-08-30 15:25:30
+ * @LastEditTime: 2022-08-30 17:27:36
  */
 import {
   Entity,
@@ -11,25 +11,19 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity('docs', { schema: 'public' })
-export class Docs {
+@Entity('file', { schema: 'public' })
+export class File {
   @PrimaryGeneratedColumn()
   public id!: number;
 
   @Column({ type: 'varchar', name: 'name', length: 120 })
   public name: string;
 
-  @Column({ type: 'int4', name: 'pid', default: -1 })
-  public pid: number;
+  @Column({ type: 'varchar', name: 'host', length: 256 })
+  public host: string;
 
-  @Column({ type: 'int4', name: 'type', default: -1 })
-  public type: number;
-
-  @Column({ type: 'int4', name: 'sort', default: 100 })
-  public sort: number;
-
-  @Column({ type: 'boolean', name: 'isDeleted', default: false })
-  public isDeleted: boolean;
+  @Column({ type: 'varchar', name: 'path', length: 256 })
+  public path: string;
 
   /*
    * Create and Update Date Columns

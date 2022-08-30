@@ -1,7 +1,7 @@
 /*
  * @Author: wangxian
  * @Date: 2022-08-29 15:50:35
- * @LastEditTime: 2022-08-29 17:22:13
+ * @LastEditTime: 2022-08-30 18:57:14
  */
 
 import { Button } from 'antd';
@@ -47,7 +47,9 @@ const DocMarkdown = (props: IDocMarkdownProps) => {
             type="link"
             icon={<PlusOutlined />}
             onClick={() => {
-              setIsModal(true);
+              if (id) {
+                setIsModal(true);
+              }
             }}
           />
         </div>
@@ -57,7 +59,7 @@ const DocMarkdown = (props: IDocMarkdownProps) => {
           <ReactMarkdown remarkPlugins={[remarkGfm]}>{content}</ReactMarkdown>
         </div>
         <div className="h-full " style={{ width: '250px' }}>
-          <MarkNav className="h-full w-full" source={content} ordered={true} />
+          <MarkNav className="h-full w-full" source={content} ordered={false} />
         </div>
       </div>
 

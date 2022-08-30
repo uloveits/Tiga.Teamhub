@@ -1,7 +1,7 @@
 /*
  * @Author: wangxian
  * @Date: 2022-08-29 11:31:34
- * @LastEditTime: 2022-08-29 16:45:09
+ * @LastEditTime: 2022-08-30 11:53:03
  */
 import {
   Controller,
@@ -18,7 +18,6 @@ import { AuthGuard } from '@nestjs/passport';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { Request } from 'express';
 import { DocsService } from './docs.service';
-import { CreateDocDto } from './dto/create-doc.dto';
 import { UpdateDocDto } from './dto/update-doc.dto';
 
 @ApiBearerAuth()
@@ -27,19 +26,35 @@ import { UpdateDocDto } from './dto/update-doc.dto';
 export class DocsController {
   constructor(private readonly docsService: DocsService) {}
 
+  /**
+   * 添加文档
+   * @param createDocDto
+   * @returns
+   */
+  @UseGuards(AuthGuard('jwt'))
   @Post()
-  create(@Body() createDocDto: CreateDocDto) {
-    return this.docsService.create(createDocDto);
+  create(@Body() body: any, @Req() request: Request) {
+    return this.docsService.create(body, (request as any).user);
   }
 
   /**
-   * 获取文档列表
+   * 获取文档目录列表
    * @returns
    */
   @UseGuards(AuthGuard('jwt'))
   @Get('type/:type')
   getAllListByType(@Param('type') type: number) {
     return this.docsService.getAllListByType(type);
+  }
+
+  /**
+   * 获取文档种类列表
+   * @returns
+   */
+  @UseGuards(AuthGuard('jwt'))
+  @Get('types')
+  getAllTypeList() {
+    return this.docsService.getAllTypeList();
   }
 
   /**

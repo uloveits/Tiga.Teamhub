@@ -1,7 +1,7 @@
 /*
  * @Author: wangxian
  * @Date: 2021-11-26 19:05:30
- * @LastEditTime: 2022-08-23 08:30:15
+ * @LastEditTime: 2022-08-30 09:52:49
  */
 const MENUS = [
   { title: '首页', path: 'home', icon: 'dashboard', hidden: false, comp: 'home', children: [] },
@@ -21,9 +21,8 @@ const MENUS = [
     icon: 'md',
     hidden: false,
     children: [
-      { title: '接口文档', path: 'wiki/api', hidden: false, comp: 'wiki/api', children: [] },
-      { title: '需求文档', path: 'wiki/demand', hidden: false, comp: 'wiki/demand', children: [] },
-      { title: '知识分享', path: 'wiki/knowledge', hidden: false, comp: 'wiki/knowledge', children: [] },
+      { title: '文档中心', path: 'wiki', hidden: false, comp: 'wiki', children: [] },
+      { title: '文档详情', path: 'wiki/detail', hidden: true, comp: 'wiki/detail', children: [] },
     ],
   },
   {

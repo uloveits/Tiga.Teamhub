@@ -203,19 +203,11 @@ export function toTree(array: any[], pid: number = -1): any[] {
   const child = array.filter((it) => it.pid === pid);
 
   return child.map((it: any) => {
-    const _children = array.filter((c) => c.pid === it.id);
-
-    if (_children.length > 0) {
-      return {
-        key: it.id,
-        label: it.name,
-        children: toTree(array, it.id),
-      };
-    }
-
     return {
+      ...it,
       key: it.id,
-      label: it.name,
+      title: it.name,
+      children: toTree(array, it.id),
     };
   });
 }
