@@ -1,7 +1,7 @@
 /*
  * @Author: wangxian
  * @Date: 2022-08-29 13:39:57
- * @LastEditTime: 2022-09-01 11:39:06
+ * @LastEditTime: 2022-09-01 17:01:03
  */
 
 import { toTree } from '@/utils';
@@ -32,6 +32,9 @@ const NavMenu = (props: INavMenuProps) => {
     const _keys = _list.map((it) => it.id);
     setItems([..._items]);
     setOpenKeys([..._keys]);
+    if (_items[0]?.children && _items[0]?.children.length > 0) {
+      setSelectedKeys([_items[0].children[0].id]);
+    }
   }, []);
 
   React.useEffect(() => {
@@ -137,7 +140,7 @@ const NavMenu = (props: INavMenuProps) => {
           <AuthButton type="link" icon={<PlusOutlined />} onClick={onAddItem} />
         </div>
       </div>
-      <div style={{ height: 'calc(100% - 40px)' }}>
+      <div style={{ height: 'calc(100% - 40px)', overflowY: 'auto' }}>
         {items.length > 0 && (
           <Tree
             className="draggable-tree"

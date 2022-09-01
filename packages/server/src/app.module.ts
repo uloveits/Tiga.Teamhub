@@ -14,6 +14,7 @@ import { ProjectModule } from './apps/project/project.module';
 import { DocsModule } from './apps/docs/docs.module';
 import { FilesModule } from './apps/files/files.module';
 import { getEnvPath } from './common/env/env.hepler';
+import { SiteModule } from './apps/site/site.module';
 
 const envFilePath: string = getEnvPath(`${__dirname}/common/env`);
 
@@ -28,6 +29,7 @@ console.log('envFilePath', envFilePath);
     ProjectModule,
     DocsModule,
     FilesModule,
+    SiteModule,
   ],
   controllers: [UserController],
   providers: [],

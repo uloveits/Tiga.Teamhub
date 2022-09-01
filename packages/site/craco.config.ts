@@ -5,24 +5,36 @@ const CracoLessPlugin = require("craco-less");
 const WebpackBar = require("webpackbar");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const path = require("path");
+const webpack = require("webpack");
 
 const pathResolve = (pathUrl: any) => path.join(__dirname, pathUrl);
 
 module.exports = {
   webpack: {
+    configure: {
+      resolve: {
+        fallback: {
+          // process: require.resolve("browser"),
+          // crypto: require.resolve("crypto-browserify"),
+          // zlib: require.resolve("browserify-zlib"),
+          // stream: require.resolve("stream-browserify"),
+          // util: require.resolve("util"),
+          // buffer: require.resolve("buffer"),
+          // asset: require.resolve("assert"),
+        },
+      },
+      plugins: [
+        // new webpack.ProvidePlugin({
+        //   Buffer: ["buffer", "Buffer"],
+        //   process: "browser.js",
+        // }),
+      ],
+    },
     alias: {
       "@": pathResolve("src"),
       // 此处是一个示例，实际可根据各自需求配置
     },
     plugins: [
-      // new BundleAnalyzerPlugin(),
-      // new CompressionWebpackPlugin({
-      //   filename: "[path].gz[query]",
-      //   algorithm: "gzip",
-      //   test: new RegExp("\\.(" + ["js", "css"].join("|") + ")$"),
-      //   threshold: 1024,
-      //   minRatio: 0.8,
-      // }),
       ...whenProd(
         () => [
           new UglifyJsPlugin({

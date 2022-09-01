@@ -1,7 +1,7 @@
 /*
  * @Author: wangxian
  * @Date: 2022-02-28 18:58:38
- * @LastEditTime: 2022-08-30 11:49:50
+ * @LastEditTime: 2022-09-01 17:06:38
  */
 import React from 'react';
 import DocApi from '@/api/DocApi';
@@ -42,7 +42,7 @@ const DetailManage = () => {
 
   return (
     <div className="bg-white w-full h-full">
-      <Split gutterSize={0} sizes={[15, 85]} direction="horizontal">
+      <Split gutterSize={0} sizes={[18, 82]} direction="horizontal">
         <div className="p-3" style={{ background: '#f7f7f7' }}>
           <NavMenu
             typeId={typeId}

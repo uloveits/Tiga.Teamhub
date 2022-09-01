@@ -8,6 +8,7 @@
     "@typescript-eslint/parser": "^5.35.1",
     "antd": "^4.22.8",
     "autoprefixer": "^10.4.8",
+    "axios": "^0.27.2",
     "babel-plugin-styled-components": "^2.0.7",
     "compression-webpack-plugin": "^10.0.0",
     "craco-fast-refresh": "^1.1.0",
@@ -15,6 +16,7 @@
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^17.0.0",
     "github-markdown-css": "^5.1.0",
+    "http-proxy-middleware": "^2.0.6",
     "markdown-navbar": "^1.4.3",
     "postcss": "^8.4.16",
     "prettier": "^2.7.1",
@@ -29,7 +31,7 @@
     "typescript": "^4.8.2"
   },
   "scripts": {
-    "start": "set PORT=5000 && craco start",
+    "start": "set PORT=4000 && craco start",
     "build": "set GENERATE_SOURCEMAP=false && yarn compilecss  && craco build",
     "analyz": "NODE_ENV=production npm_config_report=true craco build",
     "test": "craco  test",

@@ -1,7 +1,7 @@
 /*
  * @Author: wangxian
  * @Date: 2022-08-29 11:31:34
- * @LastEditTime: 2022-09-01 11:11:42
+ * @LastEditTime: 2022-09-01 16:25:15
  */
 import {
   Controller,
@@ -38,7 +38,7 @@ export class DocsController {
    * 获取文档目录列表
    * @returns
    */
-  @UseGuards(AuthGuard('jwt'))
+  // @UseGuards(AuthGuard('jwt'))
   @Get('type/:type')
   getAllListByType(@Param('type') type: number) {
     return this.docsService.getAllListByType(type);
@@ -48,7 +48,7 @@ export class DocsController {
    * 获取文档种类列表
    * @returns
    */
-  @UseGuards(AuthGuard('jwt'))
+  // @UseGuards(AuthGuard('jwt'))
   @Get('types')
   getAllTypeList() {
     return this.docsService.getAllTypeList();
@@ -74,7 +74,7 @@ export class DocsController {
    * @param id
    * @returns
    */
-  @UseGuards(AuthGuard('jwt'))
+  // @UseGuards(AuthGuard('jwt'))
   @Get('content/:docId')
   getDocConetnt(@Param('docId') docId: number) {
     return this.docsService.getDocConetnt(docId);

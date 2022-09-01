@@ -1,7 +1,7 @@
 /*
  * @Author: wangxian
  * @Date: 2022-08-18 08:21:41
- * @LastEditTime: 2022-08-31 11:13:58
+ * @LastEditTime: 2022-09-01 18:27:08
  */
 import { Injectable, Inject } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
@@ -25,7 +25,7 @@ export class TypeOrmConfigService implements TypeOrmOptionsFactory {
       migrationsTableName: 'typeorm_migrations',
       logger: 'file',
       logging: true,
-      synchronize: false, // never use TRUE in production!
+      synchronize: true, // never use TRUE in production!
     };
   }
 }
