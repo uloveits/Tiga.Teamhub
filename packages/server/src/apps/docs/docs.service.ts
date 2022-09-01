@@ -2,7 +2,7 @@ import { DocsContent } from './entities/docs_content.entity';
 /*
  * @Author: wangxian
  * @Date: 2022-08-29 11:31:34
- * @LastEditTime: 2022-08-30 16:15:43
+ * @LastEditTime: 2022-09-01 11:36:27
  */
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -24,8 +24,10 @@ export class DocsService {
    */
   create(body: any, user: any) {
     console.log('=====添加文档===', body);
-    body.type = parseInt(body.type);
-    body.creator = user.username;
+    if (!body?.id) {
+      body.type = parseInt(body.type);
+      body.creator = user.username;
+    }
 
     return this.repository.save(body);
   }
@@ -50,9 +52,17 @@ export class DocsService {
    * @returns
    */
   async getAllTypeList() {
-    return this.repository.findBy({ pid: -1, isDeleted: false });
+    const qb = this.repository.createQueryBuilder('docs');
+    qb.where({ pid: -1, isDeleted: false });
+    qb.orderBy('sort', 'ASC');
+    return qb.getMany();
   }
 
+  /**
+   * 添加文档内容
+   * @param request
+   * @returns
+   */
   async addDocContent(docId: number, body: any, user: any) {
     const resDocData = await this.docContentRepository.findOneBy({
       doc_id: docId,
@@ -66,17 +76,23 @@ export class DocsService {
     return this.docContentRepository.save(body);
   }
 
+  /**
+   * 获取文档内容
+   * @param id
+   * @returns
+   */
   getDocConetnt(docId: number) {
     return this.docContentRepository.findOneBy({
       doc_id: docId,
     });
   }
 
-  update(id: number, updateDocDto: UpdateDocDto) {
-    return `This action updates a #${id} doc`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} doc`;
+  /**
+   * 删除文档目录
+   * @param id
+   * @returns
+   */
+  remove(docId: number) {
+    return this.repository.save({ id: docId, isDeleted: true });
   }
 }

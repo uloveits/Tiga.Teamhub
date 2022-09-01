@@ -1,16 +1,17 @@
 /*
  * @Author: wangxian
  * @Date: 2022-08-29 13:39:57
- * @LastEditTime: 2022-08-30 16:15:01
+ * @LastEditTime: 2022-09-01 11:39:06
  */
 
 import { toTree } from '@/utils';
-import { Button, Input, message, Tree } from 'antd';
+import { Input, message, Popconfirm, Tree } from 'antd';
 import React from 'react';
-import { PlusOutlined } from '@ant-design/icons';
+import { PlusOutlined, DeleteOutlined } from '@ant-design/icons';
 import './index.less';
 import { DataNode } from 'antd/lib/tree';
 import DocApi from '@/api/DocApi';
+import AuthButton from '@/comps/common/AuthButton';
 
 interface INavMenuProps {
   list: any[];
@@ -47,7 +48,6 @@ const NavMenu = (props: INavMenuProps) => {
   };
 
   const onOpenChange = (keys: any[], info: any) => {
-    console.log('onOpenChange', keys);
     setOpenKeys([...keys]);
   };
 
@@ -69,7 +69,6 @@ const NavMenu = (props: INavMenuProps) => {
     });
 
   const onBlur = async (e: any) => {
-    console.log('onBlur', e.target.value);
     if (typeId && e.target.value) {
       const node = selectedNodesRef.current;
       const children = node.children;
@@ -101,12 +100,41 @@ const NavMenu = (props: INavMenuProps) => {
     }
   };
 
+  const onDeleteItem = async () => {
+    const node = selectedNodesRef.current;
+    if (node?.key) {
+      const res = await DocApi.delDocs(node?.key);
+      if (res.successed) {
+        onCallback && onCallback();
+      }
+    } else {
+      message.warning('请选择删除的节点');
+    }
+  };
+
+  const onDrop = async (data: any) => {
+    console.log('onDrop', data);
+    const param = {
+      id: data.dragNode.id,
+      pid: data.dropToGap ? data.node.pid : data.node.id,
+      sort: data.node.sort + 1,
+    };
+    const res = await DocApi.saveDocs(param);
+    if (res.successed) {
+      onCallback && onCallback();
+    }
+  };
+
   return (
     <div className="nav-menu">
       <div className="flex items-center pb-2">
         <div className="text-gray-400 flex-1">目录</div>
         <div>
-          <Button type="link" icon={<PlusOutlined />} onClick={onAddItem} />
+          <Popconfirm placement={'left'} title={tr('确认删除这条数据?')} onConfirm={onDeleteItem} okText={tr('确定')} cancelText={tr('取消')}>
+            <AuthButton type="link" icon={<DeleteOutlined />} />
+          </Popconfirm>
+
+          <AuthButton type="link" icon={<PlusOutlined />} onClick={onAddItem} />
         </div>
       </div>
       <div style={{ height: 'calc(100% - 40px)' }}>
@@ -119,6 +147,7 @@ const NavMenu = (props: INavMenuProps) => {
             draggable
             blockNode
             onExpand={onOpenChange}
+            onDrop={onDrop}
             treeData={items}
           />
         )}

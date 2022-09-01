@@ -1,16 +1,14 @@
 /*
  * @Author: wangxian
  * @Date: 2022-08-29 11:31:34
- * @LastEditTime: 2022-08-30 11:53:03
+ * @LastEditTime: 2022-09-01 11:11:42
  */
 import {
   Controller,
   Get,
   Post,
   Body,
-  Patch,
   Param,
-  Delete,
   UseGuards,
   Req,
 } from '@nestjs/common';
@@ -18,7 +16,6 @@ import { AuthGuard } from '@nestjs/passport';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { Request } from 'express';
 import { DocsService } from './docs.service';
-import { UpdateDocDto } from './dto/update-doc.dto';
 
 @ApiBearerAuth()
 @ApiTags('文档管理')
@@ -83,13 +80,14 @@ export class DocsController {
     return this.docsService.getDocConetnt(docId);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateDocDto: UpdateDocDto) {
-    return this.docsService.update(+id, updateDocDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.docsService.remove(+id);
+  /**
+   * 删除文档目录
+   * @param docId
+   * @returns
+   */
+  @UseGuards(AuthGuard('jwt'))
+  @Post(':docId/delete')
+  remove(@Param('docId') docId: number) {
+    return this.docsService.remove(docId);
   }
 }

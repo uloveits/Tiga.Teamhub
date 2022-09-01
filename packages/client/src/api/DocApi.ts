@@ -1,7 +1,7 @@
 /*
  * @Author: wangxian
  * @Date: 2022-03-01 09:16:39
- * @LastEditTime: 2022-08-30 11:50:13
+ * @LastEditTime: 2022-09-01 11:14:26
  */
 import baseHttp from '@/utils/request';
 
@@ -60,5 +60,14 @@ export default class DocApi {
   static saveDocs(data: any) {
     const api = '/api/docs';
     return HttpClient.fetch<any>(api, { method: 'post', data });
+  }
+
+  /**
+   * 删除文档目录
+   * @param input
+   */
+  static delDocs(id: number) {
+    const api = '/api/docs/{id}/delete'.replace('{id}', id.toString());
+    return HttpClient.fetch<any>(api, { method: 'post' });
   }
 }

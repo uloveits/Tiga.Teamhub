@@ -1,11 +1,11 @@
 /*
  * @Author: wangxian
  * @Date: 2022-08-29 15:50:35
- * @LastEditTime: 2022-08-30 18:57:14
+ * @LastEditTime: 2022-09-01 11:02:09
  */
 
 import { Button } from 'antd';
-import { PlusOutlined } from '@ant-design/icons';
+import { FormOutlined } from '@ant-design/icons';
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
@@ -41,11 +41,11 @@ const DocMarkdown = (props: IDocMarkdownProps) => {
   return (
     <>
       <div className="flex">
-        <div className="text-gray-400 flex-1">{name}</div>
-        <div>
+        <div className="text-gray-400 flex-1">
+          {name}
           <Button
             type="link"
-            icon={<PlusOutlined />}
+            icon={<FormOutlined />}
             onClick={() => {
               if (id) {
                 setIsModal(true);

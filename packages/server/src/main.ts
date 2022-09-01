@@ -1,7 +1,7 @@
 /*
  * @Author: wangxian
  * @Date: 2022-08-16 19:00:58
- * @LastEditTime: 2022-08-29 19:17:24
+ * @LastEditTime: 2022-09-01 08:59:04
  */
 import { ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
@@ -15,6 +15,7 @@ import { TransformInterceptor } from './interceptor/transform.interceptor';
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
   const config: ConfigService = app.get(ConfigService);
+
   const port: number = config.get<number>('PORT');
 
   // 配置静态资源目录
@@ -40,7 +41,11 @@ async function bootstrap() {
   SwaggerModule.setup('api-doc', app, document);
 
   await app.listen(port, () =>
-    console.log(`[API] 服务已经启动 ${config.get<string>('BASE_URL')}`),
+    console.log(
+      `[API] 服务已经启动 ${config.get<string>(
+        'BASE_URL',
+      )} ${config.get<string>('BASE_URL_IP')}`,
+    ),
   );
 }
 
