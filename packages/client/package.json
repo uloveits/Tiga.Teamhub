@@ -66,6 +66,8 @@
     "react-scripts": "4.0.1",
     "react-split": "^2.0.9",
     "react-trello": "^2.2.11",
+    "rehype-highlight": "^5.0.2",
+    "rehype-raw": "^6.1.1",
     "remark-gfm": "^3.0.1",
     "ronds-graph-chart-phm": "^1.0.5",
     "ronds-metadata": "^1.1.36",
