@@ -8,7 +8,6 @@ import {
   Delete,
 } from '@nestjs/common';
 import { SiteService } from './site.service';
-import { CreateSiteDto } from './dto/create-site.dto';
 import { UpdateSiteDto } from './dto/update-site.dto';
 
 @Controller('site')
@@ -16,8 +15,8 @@ export class SiteController {
   constructor(private readonly siteService: SiteService) {}
 
   @Post()
-  create(@Body() createSiteDto: CreateSiteDto) {
-    return this.siteService.create(createSiteDto);
+  create(@Body() body: any) {
+    return this.siteService.create(body);
   }
 
   @Get()
