@@ -1,18 +1,21 @@
 /*
  * @Author: wangxian
  * @Date: 2022-08-29 15:50:35
- * @LastEditTime: 2022-09-01 11:48:39
+ * @LastEditTime: 2022-09-02 17:07:21
  */
 
 import { FormOutlined } from '@ant-design/icons';
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import rehypeRaw from 'rehype-raw';
+import rehypeHighlight from 'rehype-highlight';
 import MarkNav from 'markdown-navbar';
 import DocApi from '@/api/DocApi';
 import AuthButton from '@/comps/common/AuthButton';
 import 'markdown-navbar/dist/navbar.css';
 import 'github-markdown-css';
+import './index.less';
 import AddOrEditDocContentModal from '../AddOrEditDocContent';
 
 interface IDocMarkdownProps {
@@ -57,8 +60,10 @@ const DocMarkdown = (props: IDocMarkdownProps) => {
         </div>
       </div>
       <div className="flex" style={{ height: 'calc(100% - 40px)' }}>
-        <div className="flex-1 p-6 markdown-body overflow-y-auto">
-          <ReactMarkdown remarkPlugins={[remarkGfm]}>{content}</ReactMarkdown>
+        <div className="flex-1 p-6 markdown-body overflow-y-auto react-mark-down">
+          <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw, rehypeHighlight]}>
+            {content}
+          </ReactMarkdown>
         </div>
         <div className="h-full " style={{ width: '250px' }}>
           <MarkNav className="h-full w-full" source={content} ordered={false} />
