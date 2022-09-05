@@ -12,6 +12,8 @@ React + Nest 项目管理工具（初步设想）
 
 项目管理端 ts + react
 
+启动步骤 yarn install yarn start:client
+
 ## server
 
 后端 ts + nestjs
