@@ -1,7 +1,7 @@
 /*
  * @Author: wangxian
  * @Date: 2022-08-29 15:50:35
- * @LastEditTime: 2022-09-02 17:07:21
+ * @LastEditTime: 2022-09-03 13:54:41
  */
 
 import { FormOutlined } from '@ant-design/icons';
@@ -9,14 +9,17 @@ import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
-import rehypeHighlight from 'rehype-highlight';
+// import rehypeHighlight from 'rehype-highlight';
 import MarkNav from 'markdown-navbar';
 import DocApi from '@/api/DocApi';
 import AuthButton from '@/comps/common/AuthButton';
 import 'markdown-navbar/dist/navbar.css';
 import 'github-markdown-css';
-import './index.less';
+import { exportText } from '@/utils';
+import { message } from 'antd';
+
 import AddOrEditDocContentModal from '../AddOrEditDocContent';
+import './index.less';
 
 interface IDocMarkdownProps {
   id?: number;
@@ -41,12 +44,27 @@ const DocMarkdown = (props: IDocMarkdownProps) => {
     getContent();
   }, [getContent]);
 
+  React.useEffect(() => {
+    document.querySelectorAll('a').forEach((a) => {
+      a.onclick = () => {
+        const href = a.getAttribute('href');
+        console.log('我被点击了=>', href, a);
+        // if (href === '/') return (location.pathname = 'www.baidu.com');
+        // event.preventDefault();
+      };
+    });
+  }, []);
+
+  const onExportMd = () => {
+    exportText(`${name}.md`, content);
+  };
+
   return (
     <>
-      <div className="flex">
-        <div className="text-gray-400 flex-1">
-          {name}
-          {name && (
+      {name && (
+        <div className="flex p-1 items-center" style={{ background: '#f7f7f7' }}>
+          <div className="text-gray-800 flex-1">
+            {name}
             <AuthButton
               type="link"
               icon={<FormOutlined />}
@@ -56,12 +74,26 @@ const DocMarkdown = (props: IDocMarkdownProps) => {
                 }
               }}
             />
-          )}
+          </div>
+          <div>
+            <AuthButton
+              size="small"
+              onClick={() => {
+                message.warn('暂未开放');
+              }}
+            >
+              上传
+            </AuthButton>
+            <AuthButton type="primary" size="small" onClick={onExportMd}>
+              下载
+            </AuthButton>
+          </div>
         </div>
-      </div>
-      <div className="flex" style={{ height: 'calc(100% - 40px)' }}>
+      )}
+
+      <div className="flex relative" style={{ height: 'calc(100% - 40px)' }}>
         <div className="flex-1 p-6 markdown-body overflow-y-auto react-mark-down">
-          <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw, rehypeHighlight]}>
+          <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
             {content}
           </ReactMarkdown>
         </div>

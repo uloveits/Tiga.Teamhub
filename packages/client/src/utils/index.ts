@@ -211,3 +211,25 @@ export function toTree(array: any[], pid: number = -1): any[] {
     };
   });
 }
+
+/**
+ * 文本导出
+ * @param name
+ * @param data
+ */
+export function exportText(name: string, data: string) {
+  const urlObject = window.URL || window.webkitURL || window;
+
+  const export_blob = new Blob([data]);
+
+  const save_link: any = document.createElementNS('http://www.w3.org/1999/xhtml', 'a');
+  save_link.href = urlObject.createObjectURL(export_blob);
+  save_link.download = name;
+  fakeClick(save_link);
+}
+
+export function fakeClick(obj: any) {
+  const ev = document.createEvent('MouseEvents');
+  ev.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+  obj.dispatchEvent(ev);
+}

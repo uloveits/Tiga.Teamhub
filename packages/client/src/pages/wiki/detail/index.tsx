@@ -1,7 +1,7 @@
 /*
  * @Author: wangxian
  * @Date: 2022-02-28 18:58:38
- * @LastEditTime: 2022-09-01 17:06:38
+ * @LastEditTime: 2022-09-03 11:35:02
  */
 import React from 'react';
 import DocApi from '@/api/DocApi';
@@ -53,7 +53,7 @@ const DetailManage = () => {
             }}
           />
         </div>
-        <div className="p-3">
+        <div className="pl-3">
           <DocMarkdown id={curDoc?.id} name={curDoc?.label} />
         </div>
       </Split>

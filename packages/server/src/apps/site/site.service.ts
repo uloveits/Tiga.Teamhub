@@ -1,11 +1,26 @@
+/*
+ * @Author: wangxian
+ * @Date: 2022-09-01 18:29:59
+ * @LastEditTime: 2022-09-03 10:17:42
+ */
 import { Injectable } from '@nestjs/common';
-import { CreateSiteDto } from './dto/create-site.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { UpdateSiteDto } from './dto/update-site.dto';
+import { SiteMenu } from './entities/site_menu.entity';
 
 @Injectable()
 export class SiteService {
-  create(createSiteDto: CreateSiteDto) {
-    return 'This action adds a new site';
+  @InjectRepository(SiteMenu)
+  private readonly repository: Repository<SiteMenu>;
+
+  /**
+   * 保存菜单
+   * @param body
+   * @returns
+   */
+  create(body: any) {
+    return this.repository.save(body);
   }
 
   findAll() {
