@@ -1,7 +1,7 @@
 /*
  * @Author: wangxian
  * @Date: 2022-08-29 15:50:35
- * @LastEditTime: 2022-09-03 13:54:41
+ * @LastEditTime: 2022-09-06 17:25:01
  */
 
 import { FormOutlined } from '@ant-design/icons';
@@ -76,6 +76,15 @@ const DocMarkdown = (props: IDocMarkdownProps) => {
             />
           </div>
           <div>
+            <AuthButton
+              type="primary"
+              size="small"
+              onClick={() => {
+                message.warn('分享地址已复制');
+              }}
+            >
+              分享
+            </AuthButton>
             <AuthButton
               size="small"
               onClick={() => {
