@@ -5,8 +5,8 @@
  */
 
 export const SYSTEM_CONFIG = {
-  SYSTEM_NAME: 'Teamhub',
-  LOGO_NAME: 'TIGA',
+  SYSTEM_NAME: 'One Hub',
+  LOGO_NAME: 'tiga',
 };
 
 export const USER_CACHE_KEY = 'user_cache_key';
