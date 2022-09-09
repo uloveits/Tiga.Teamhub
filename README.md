@@ -17,3 +17,5 @@ React + Nest 项目管理工具（初步设想）
 ## server
 
 后端 ts + nestjs
+
+启动步骤 yarn install yarn start:server
