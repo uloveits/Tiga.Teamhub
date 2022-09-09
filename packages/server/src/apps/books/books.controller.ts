@@ -1,3 +1,8 @@
+/*
+ * @Author: wangxian
+ * @Date: 2022-09-07 08:24:07
+ * @LastEditTime: 2022-09-07 10:02:42
+ */
 import {
   Controller,
   Get,
@@ -15,7 +20,6 @@ import { AuthGuard } from '@nestjs/passport';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Request } from 'express';
 import { BooksService } from './books.service';
-import { CreateBookDto } from './dto/create-book.dto';
 import { UpdateBookDto } from './dto/update-book.dto';
 
 @Controller('books')
@@ -30,14 +34,10 @@ export class BooksController {
     return this.booksService.addBooks(file, body, (request as any).user);
   }
 
-  @Post()
-  create(@Body() createBookDto: CreateBookDto) {
-    return this.booksService.create(createBookDto);
-  }
-
-  @Get()
-  findAll() {
-    return this.booksService.findAll();
+  @UseGuards(AuthGuard('jwt'))
+  @Post('list')
+  getAllBook() {
+    return this.booksService.getAllBook();
   }
 
   @Get(':id')

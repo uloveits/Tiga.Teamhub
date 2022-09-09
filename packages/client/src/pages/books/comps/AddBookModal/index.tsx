@@ -1,9 +1,11 @@
 /*
  * @Author: wangxian
  * @Date: 2022-08-24 11:12:40
- * @LastEditTime: 2022-08-30 15:29:23
+ * @LastEditTime: 2022-09-07 13:44:32
  */
 
+import BooksApi from '@/api/BooksApi';
+import { message } from 'antd';
 import { FormInstance } from 'antd/lib/form';
 import React from 'react';
 import { MetadataForm } from 'ronds-metadata';
@@ -21,7 +23,12 @@ const AddBookModal = (props: IAddBookModalProps) => {
 
   const onFinish = async (values: any) => {
     console.log(values);
-    onSuccess && onSuccess();
+
+    const res = await BooksApi.add(values);
+    if (res.successed) {
+      message.success('保存成功');
+      onSuccess && onSuccess();
+    }
   };
 
   return (
@@ -36,7 +43,7 @@ const AddBookModal = (props: IAddBookModalProps) => {
         canMaximize={true}
         itemState={{
           width: 500,
-          height: 400,
+          height: 500,
         }}
       >
         <div style={{ width: '100%', height: '100%' }}>

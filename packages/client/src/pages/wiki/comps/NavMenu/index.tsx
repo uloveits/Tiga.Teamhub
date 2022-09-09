@@ -1,7 +1,7 @@
 /*
  * @Author: wangxian
  * @Date: 2022-08-29 13:39:57
- * @LastEditTime: 2022-09-01 17:01:03
+ * @LastEditTime: 2022-09-07 09:07:55
  */
 
 import { toTree } from '@/utils';
@@ -34,7 +34,9 @@ const NavMenu = (props: INavMenuProps) => {
     setOpenKeys([..._keys]);
     if (_items[0]?.children && _items[0]?.children.length > 0) {
       setSelectedKeys([_items[0].children[0].id]);
+      onSelectChange && onSelectChange({ id: _items[0].children[0].id, label: _items[0].children[0].title });
     }
+    // eslint-disable-next-line
   }, []);
 
   React.useEffect(() => {

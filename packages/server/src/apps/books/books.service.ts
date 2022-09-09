@@ -1,10 +1,14 @@
+/*
+ * @Author: wangxian
+ * @Date: 2022-09-07 08:24:07
+ * @LastEditTime: 2022-09-07 14:01:14
+ */
 import { Inject, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { InjectRepository } from '@nestjs/typeorm';
-import { writeFileSync } from 'fs';
+import { existsSync, writeFile } from 'fs';
+import { UserException } from '../../filter/user-exception.filter';
 import { Repository } from 'typeorm';
-import { Guid } from '../../utils/utils';
-import { CreateBookDto } from './dto/create-book.dto';
 import { UpdateBookDto } from './dto/update-book.dto';
 import { Books } from './entities/book.entity';
 
@@ -17,25 +21,36 @@ export class BooksService {
   private readonly config: ConfigService;
 
   async addBooks(file: any, body: any, user: any) {
-    console.log('upload', file, body, user);
-    // const guid = Guid();
-    // const type = file.mimetype.split('/');
-    // writeFileSync(`./public/books/${guid}.${type[1]}`, file.buffer);
-    // const _books = new Books();
-    // _books.name = body.name;
-    // _books.creator = user.username;
+    const type = file.originalname.split('.');
 
-    // const res = await this.repository.save(_books);
+    const outputFolder = './public/books';
+    if (existsSync(outputFolder)) {
+      const path = `/books/${body.name}.${type[type.length - 1]}`;
+      writeFile(`./public${path}`, file.buffer, (error) => {
+        if (error) {
+          throw new UserException('文件上传失败');
+          console.log(error);
+        }
+      });
+      const _books = new Books();
+      _books.name = body.name;
+      _books.tags = body.tags;
+      _books.sort = body.sort;
+      _books.creator = user.username;
+      _books.url = `${this.config.get<string>('BASE_URL_IP')}${path}`;
 
-    // return res;
+      const res = await this.repository.save(_books);
+
+      return res;
+    }
+    throw new UserException('文件上传失败');
   }
 
-  create(createBookDto: CreateBookDto) {
-    return 'This action adds a new book';
-  }
-
-  findAll() {
-    return `This action returns all books`;
+  async getAllBook() {
+    const qb = this.repository.createQueryBuilder('books');
+    qb.where({ isDeleted: false });
+    qb.orderBy('sort', 'ASC');
+    return qb.getMany();
   }
 
   findOne(id: number) {
