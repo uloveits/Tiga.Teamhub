@@ -12,10 +12,14 @@ import phm_demo_la from './phm_demo_la.json';
 import Spectrogram from './Spectrogram.json';
 
 const Home = () => {
+  // const [tickvals, setTickvals] = React.useState<number[]>([]);
+
   React.useEffect(() => {
     console.log('phm_demo_ha', phm_demo_ha);
     console.log('phm_demo_la', phm_demo_la);
     console.log('Spectrogram', Spectrogram);
+    // const _tickvals = (phm_demo_ha as any).x.map((it: string, idx: number) => idx);
+    // setTickvals([..._tickvals]);
   }, []);
 
   const onPlotClick = (e: any) => {
@@ -23,11 +27,11 @@ const Home = () => {
   };
 
   return (
-    <>
+    <div className="w-full h-full overflow-y-auto">
       <AutoSize>
         {({ width, height }) => {
           return (
-            <div className="flex ">
+            <div className="flex">
               <div>
                 <Plot
                   data={[
@@ -38,7 +42,20 @@ const Home = () => {
                       type: 'heatmap',
                     },
                   ]}
-                  layout={{ title: 'phm_demo_ha.json(log)', width: width / 2, height: 400, yaxis: { type: 'log' }, xaxis: { type: 'date' } }}
+                  layout={{
+                    title: 'phm_demo_ha.json(log)',
+                    width: width / 2,
+                    // margin: { t: 0, r: 0, l: 0, b: 0 },
+                    height: 400,
+                    yaxis: { type: 'log' },
+
+                    xaxis: {
+                      // tickvals,
+                      // tickmode: 'array',
+                      // ticktext: (phm_demo_ha as any).x,
+                      // tickformat: '',
+                    },
+                  }}
                   config={{ displayModeBar: false, doubleClick: 'reset+autosize' }}
                   onClick={onPlotClick}
                 />
@@ -85,7 +102,7 @@ const Home = () => {
           );
         }}
       </AutoSize>
-    </>
+    </div>
   );
 };
 
