@@ -30,7 +30,7 @@ const Home = () => {
       return val?.substring(5, 16);
     });
     setTickvals([..._tickvals, xLength - 1]);
-    setTicktext([..._ticktext, (phm_demo_ha as any).x[xLength - 1]]);
+    setTicktext([..._ticktext, (phm_demo_ha as any).x[xLength - 1]?.substring(5, 16)]);
   }, []);
 
   const onPlotClick = (e: any) => {
@@ -50,12 +50,8 @@ const Home = () => {
                     {
                       y: (phm_demo_ha as any).y,
                       z: (phm_demo_ha as any).z,
-                      text: (phm_demo_ha as any).x,
                       type: 'heatmap',
-                      // mode: 'lines+markers',
-
-                      hovertext: (phm_demo_ha as any).x,
-                      hovertemplate: 'text=%{text}<br>y=%{y}<extra></extra>',
+                      hoveron: 'fills',
                     },
                   ]}
                   layout={{
@@ -63,12 +59,18 @@ const Home = () => {
                     width: width / 2,
                     // margin: { t: 0, r: 0, l: 0, b: 0 },
                     height: 400,
-                    yaxis: { type: 'log' },
+                    yaxis: { type: 'log', dtick: 0.30102999566 },
                     xaxis: {
                       tickvals,
                       tickmode: 'array',
                       ticktext,
                     },
+                    annotations: [
+                      // {
+                      //   x: 2,
+                      //   text: 'Annotation (10,10)',
+                      // },
+                    ],
                   }}
                   config={{ displayModeBar: false, doubleClick: 'reset+autosize' }}
                   onClick={onPlotClick}
@@ -82,7 +84,7 @@ const Home = () => {
                       type: 'heatmap',
                     },
                   ]}
-                  layout={{ title: 'phm_demo_ha.json(linear)', width: width / 2, height: 400, yaxis: { type: 'linear' } }}
+                  layout={{ title: 'phm_demo_ha.json(log)', width: width / 2, height: 400, yaxis: { type: 'log' } }}
                   config={{ displayModeBar: false, doubleClick: 'reset+autosize' }}
                 />
               </div>
