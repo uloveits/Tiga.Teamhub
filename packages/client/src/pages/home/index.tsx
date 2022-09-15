@@ -1,120 +1,100 @@
 /*
  * @Author: wangxian
  * @Date: 2022-08-19 16:08:42
- * @LastEditTime: 2022-09-13 15:44:45
+ * @LastEditTime: 2022-09-15 14:10:41
  */
 
+import { Button } from 'antd';
+import Plotly from 'plotly.js';
 import React from 'react';
-import Plot from 'react-plotly.js';
+import Plot, { Figure } from 'react-plotly.js';
 import { AutoSize } from 'ronds-react-ui';
-import phm_demo_ha from './phm_demo_ha.json';
-import phm_demo_la from './phm_demo_la.json';
+import mel_data from './mel_data.json';
 
 const Home = () => {
-  const [tickvals, setTickvals] = React.useState<number[]>([]);
-  const [ticktext, setTicktext] = React.useState<string[]>([]);
+  const graphDivRef = React.useRef<HTMLElement>();
 
-  React.useEffect(() => {
-    console.log('phm_demo_ha', phm_demo_ha);
-    console.log('phm_demo_la', phm_demo_la);
-    const _chartData: any = phm_demo_ha;
-    const xLength = (phm_demo_ha as any).x.length;
-    const tickNumber = [0, 1, 2, 3, 4];
-    const aver = Math.round(xLength / tickNumber.length);
-    const _tickvals = tickNumber.map((it: number) => it * aver);
-    const _ticktext = _tickvals.map((it: number, idx: number) => {
-      const val = _chartData.x[it];
-      if (idx === 0) {
-        return _chartData.x[0]?.substring(0, 16);
-      }
-      return val?.substring(5, 16);
-    });
-    setTickvals([..._tickvals, xLength - 1]);
-    setTicktext([..._ticktext, (phm_demo_ha as any).x[xLength - 1]?.substring(5, 16)]);
-  }, []);
+  const onInitialized = (figure: Figure, graphDiv: HTMLElement) => {
+    console.log('onInitialized', figure, graphDiv);
+    graphDivRef.current = graphDiv as any;
+  };
 
   const onPlotClick = (e: any) => {
     console.log(e);
-    console.log(e, e.points[0].x, (phm_demo_ha as any).wid[e.points[0].x]);
+    console.log(e, e.points[0].x, (mel_data as any).extra[e.points[0].x]);
+  };
+
+  const onZoom = async () => {
+    if (!graphDivRef.current) return;
+
+    Plotly.relayout(graphDivRef.current, {
+      'yaxis.autorange': true,
+      'xaxis.autorange': true,
+    });
   };
 
   return (
     <div className="w-full h-full overflow-y-auto">
       <AutoSize>
-        {({ width, height }) => {
+        {({ width }) => {
           return (
-            <div className="flex">
-              <div>
-                <Plot
-                  data={[
-                    {
-                      y: (phm_demo_ha as any).y,
-                      z: (phm_demo_ha as any).z,
-                      type: 'heatmap',
-                      hoveron: 'fills',
-                    },
-                  ]}
-                  layout={{
-                    title: 'phm_demo_ha.json(log)',
-                    width: width / 2,
-                    // margin: { t: 0, r: 0, l: 0, b: 0 },
-                    height: 400,
-                    yaxis: { type: 'log', dtick: 0.30102999566 },
-                    xaxis: {
-                      tickvals,
-                      tickmode: 'array',
-                      ticktext,
-                    },
-                    annotations: [
-                      // {
-                      //   x: 2,
-                      //   text: 'Annotation (10,10)',
-                      // },
-                    ],
-                  }}
-                  config={{ displayModeBar: false, doubleClick: 'reset+autosize' }}
-                  onClick={onPlotClick}
-                />
-                <Plot
-                  data={[
-                    {
-                      // x: (phm_demo_ha as any).x,
-                      y: (phm_demo_ha as any).y,
-                      z: (phm_demo_ha as any).z,
-                      type: 'heatmap',
-                    },
-                  ]}
-                  layout={{ title: 'phm_demo_ha.json(log)', width: width / 2, height: 400, yaxis: { type: 'log' } }}
-                  config={{ displayModeBar: false, doubleClick: 'reset+autosize' }}
-                />
-              </div>
-              <div>
-                <Plot
-                  data={[
-                    {
-                      // x: (phm_demo_la as any).x,
-                      y: (phm_demo_la as any).y,
-                      z: (phm_demo_la as any).z,
-                      type: 'heatmap',
-                    },
-                  ]}
-                  layout={{ title: 'phm_demo_la.json(log)', width: width / 2, height: 400, yaxis: { type: 'log' } }}
-                  config={{ displayModeBar: false, doubleClick: 'reset+autosize' }}
-                />
-                <Plot
-                  data={[
-                    {
-                      // x: (phm_demo_la as any).x,
-                      y: (phm_demo_la as any).y,
-                      z: (phm_demo_la as any).z,
-                      type: 'heatmap',
-                    },
-                  ]}
-                  layout={{ title: 'phm_demo_la.json(linear)', width: width / 2, height: 400, yaxis: { type: 'linear' } }}
-                  config={{ displayModeBar: false, doubleClick: 'reset+autosize' }}
-                />
-              </div>
-            </div>
+            <>
+              <Button onClick={onZoom}>reset zoom</Button>
+
+              <Plot
+                data={[
+                  {
+                    x: (mel_data as any).x,
+                    y: (mel_data as any).y,
+                    z: (mel_data as any).z,
+                    type: 'heatmap',
+                    // colorscale: [[-1, '#000']],
+                  },
+                ]}
+                layout={{
+                  title: 'phm_demo_ha.json(log)',
+                  width: width / 2,
+                  // margin: { t: 0, r: 0, l: 0, b: 0 },
+                  height: 400,
+                  plot_bgcolor: '#000',
+                  yaxis: { type: 'log', dtick: 0.30102999566 },
+                  xaxis: {
+                    type: 'date',
+                    tickformat: '%m-%d %H:%M',
+                  },
+                  // annotations: [
+                  //   {
+                  //     arrowwidth: 1,
+                  //     arrowhead: 0,
+                  //     showarrow: true,
+                  //     x: '2021-09-19 12:00:00',
+                  //     y: 3,
+                  //     text: '2,3',
+                  //     font: { color: 'yellow' },
+                  //     // ay: 0,
+                  //     // ax: 0,
+                  //     // valign: 'middle',
+                  //     // xanchor: 'left',
+                  //     arrowcolor: 'yellow',
+                  //   },
+                  // ],
+                }}
+                config={{
+                  displayModeBar: false,
+                  doubleClick: 'reset+autosize',
+                  edits: {
+                    annotationTail: true,
+                    shapePosition: false,
+                  },
+                }}
+                onClick={onPlotClick}
+                onInitialized={onInitialized}
+                // onHover={(e: any) => console.log('onHover', e)}
+                // onUnhover={(e: any) => console.log('onUnhover', e)}
+                // onSelected={(e: any) => console.log('onSelected', e)}
+                onRelayout={(e: any) => console.log('onRelayout', e)}
+              />
+            </>
           );
         }}
       </AutoSize>
