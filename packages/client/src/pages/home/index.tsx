@@ -9,7 +9,7 @@ import React from 'react';
 import moment from 'moment';
 import Plot, { Figure } from 'react-plotly.js';
 import { AutoSize } from 'ronds-react-ui';
-import { Plotly } from './plotly';
+import { Plotly } from 'ronds-graph-chart-phm';
 import mel_data from './mel_data.json';
 
 const Home = () => {
