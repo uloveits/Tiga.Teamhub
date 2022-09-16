@@ -1,12 +1,12 @@
-import { DocsContent } from './entities/docs_content.entity';
 /*
  * @Author: wangxian
  * @Date: 2022-08-29 11:31:34
- * @LastEditTime: 2022-09-01 15:52:22
+ * @LastEditTime: 2022-09-16 09:45:55
  */
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { DocsContent } from './entities/docs_content.entity';
 
 import { Docs } from './entities/docs.entity';
 
