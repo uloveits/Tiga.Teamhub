@@ -1,6 +1,6 @@
 # Tiga.Teamhub
 
-React + Nest 项目管理工具 （包含pdf书记管理，文档笔记整理）
+React + Nest 项目管理工具 （包含pdf书记管理，文档笔记整理,项目看板）
 
 ## site
 
