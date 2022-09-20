@@ -5,6 +5,7 @@ import { Redirect } from 'react-router';
 import memoize from 'memoize-one';
 import BaseLayout from '@/comps/layout/Baselayout';
 import Login from '@/pages/login';
+import Shared from '@/pages/wiki/shared';
 
 import MENUS from './menus.config';
 
@@ -69,6 +70,7 @@ const RouterConfig = () => {
           return (
             <Switch>
               <Route path="/login" component={Login} />
+              <Route path="/shared" component={Shared} />
               <Route path="/" render={(_props) => onEnter(_props)} />
             </Switch>
           );
