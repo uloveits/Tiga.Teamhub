@@ -11,6 +11,8 @@ const SharedPage = () => {
     setDocId(request.docId);
   }, []);
 
+  React.useEffect(() => {}, []);
+
   return (
     <>
       <div className="p-2 pl-4 font-bold text-xl">cp命令 – 复制文件或目录</div>
