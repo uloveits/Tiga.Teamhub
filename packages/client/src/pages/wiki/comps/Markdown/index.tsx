@@ -17,7 +17,7 @@ import 'markdown-navbar/dist/navbar.css';
 import 'github-markdown-css';
 import { exportText } from '@/utils';
 import { message } from 'antd';
-
+import Copy from 'copy-to-clipboard';
 import AddOrEditDocContentModal from '../AddOrEditDocContent';
 import './index.less';
 
@@ -80,6 +80,9 @@ const DocMarkdown = (props: IDocMarkdownProps) => {
               type="primary"
               size="small"
               onClick={() => {
+                console.log(window.location);
+                const shareUrl = `${window.location.origin}/#/shared?docId=${id}&docName=${name}`;
+                Copy(encodeURI(shareUrl));
                 message.warn('分享地址已复制');
               }}
             >

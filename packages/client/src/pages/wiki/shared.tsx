@@ -4,18 +4,17 @@ import DocMarkdown from './comps/Markdown';
 
 const SharedPage = () => {
   const [docId, setDocId] = React.useState<number>();
+  const [docName, setDocName] = React.useState<string>();
 
   React.useEffect(() => {
-    const request = GetRequest(window.location.href);
-    console.log(request);
+    const request = GetRequest(decodeURI(window.location.href));
     setDocId(request.docId);
+    setDocName(request.docName);
   }, []);
-
-  React.useEffect(() => {}, []);
 
   return (
     <>
-      <div className="p-2 pl-4 font-bold text-xl">cp命令 – 复制文件或目录</div>
+      <div className="p-2 pl-5 font-bold text-xl">{docName}</div>
       <DocMarkdown id={docId} />
     </>
   );

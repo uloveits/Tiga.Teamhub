@@ -28,6 +28,7 @@
     "circular-dependency-plugin": "^5.2.2",
     "classnames": "^2.2.6",
     "codemirror": "^5.58.2",
+    "copy-to-clipboard": "^3.3.2",
     "core-js": "^3.8.1",
     "craco-fast-refresh": "^1.0.2",
     "craco-less": "^1.17.0",
