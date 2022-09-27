@@ -6,8 +6,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { InjectRepository } from '@nestjs/typeorm';
-import { existsSync, writeFile } from 'fs';
-import { UserException } from '../../filter/user-exception.filter';
+
 import { Repository } from 'typeorm';
 import { UpdateBookDto } from './dto/update-book.dto';
 import { Books } from './entities/book.entity';
@@ -21,29 +20,21 @@ export class BooksService {
   private readonly config: ConfigService;
 
   async addBooks(file: any, body: any, user: any) {
-    const type = file.originalname.split('.');
+    const _books = new Books();
+    _books.name = body.name;
+    _books.tags = body.tags;
+    _books.sort = body.sort;
+    _books.creator = user.username;
+    _books.url = `${this.config.get<string>('BASE_URL_IP')}/${file.path.replace(
+      'public/',
+      '',
+    )}`;
 
-    const outputFolder = './public/books';
-    if (existsSync(outputFolder)) {
-      const path = `/books/${body.name}.${type[type.length - 1]}`;
-      writeFile(`./public${path}`, file.buffer, (error) => {
-        if (error) {
-          throw new UserException('文件上传失败');
-          console.log(error);
-        }
-      });
-      const _books = new Books();
-      _books.name = body.name;
-      _books.tags = body.tags;
-      _books.sort = body.sort;
-      _books.creator = user.username;
-      _books.url = `${this.config.get<string>('BASE_URL_IP')}${path}`;
+    console.log(_books);
 
-      const res = await this.repository.save(_books);
+    const res = await this.repository.save(_books);
 
-      return res;
-    }
-    throw new UserException('文件上传失败');
+    return res;
   }
 
   async getAllBook() {
