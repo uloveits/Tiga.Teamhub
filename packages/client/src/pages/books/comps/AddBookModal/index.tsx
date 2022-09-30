@@ -19,14 +19,16 @@ interface IAddBookModalProps {
 const AddBookModal = (props: IAddBookModalProps) => {
   const { isModal, onCancel, onSuccess } = props;
 
+  const [confirmLoading, setConfirmLoading] = React.useState<boolean>(false);
   const formRef = React.useRef<FormInstance>();
 
   const onFinish = async (values: any) => {
     console.log(values);
-
+    setConfirmLoading(true);
     const res = await BooksApi.add(values);
     if (res.successed) {
       message.success('保存成功');
+      setConfirmLoading(false);
       onSuccess && onSuccess();
     }
   };
@@ -39,6 +41,7 @@ const AddBookModal = (props: IAddBookModalProps) => {
         onOk={() => {
           if (formRef.current) formRef.current.submit();
         }}
+        confirmLoading={confirmLoading}
         title={'添加书籍'}
         canMaximize={true}
         itemState={{
