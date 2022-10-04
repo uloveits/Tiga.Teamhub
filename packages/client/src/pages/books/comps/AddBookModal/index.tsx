@@ -5,7 +5,7 @@
  */
 
 import BooksApi from '@/api/BooksApi';
-import { message } from 'antd';
+import { message, Spin } from 'antd';
 import { FormInstance } from 'antd/lib/form';
 import React from 'react';
 import { MetadataForm } from 'ronds-metadata';
@@ -49,7 +49,7 @@ const AddBookModal = (props: IAddBookModalProps) => {
           height: 500,
         }}
       >
-        <div style={{ width: '100%', height: '100%' }}>
+        <Spin wrapperClassName="w-full h-full" spinning={confirmLoading}>
           <MetadataForm
             initialValues={{}}
             schema={ADD_SCHEMA}
@@ -58,7 +58,7 @@ const AddBookModal = (props: IAddBookModalProps) => {
             }}
             onFinish={onFinish}
           />
-        </div>
+        </Spin>
       </Modal>
     </>
   );

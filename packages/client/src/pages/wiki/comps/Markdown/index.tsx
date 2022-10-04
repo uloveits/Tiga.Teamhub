@@ -44,17 +44,6 @@ const DocMarkdown = (props: IDocMarkdownProps) => {
     getContent();
   }, [getContent]);
 
-  React.useEffect(() => {
-    document.querySelectorAll('a').forEach((a) => {
-      a.onclick = () => {
-        const href = a.getAttribute('href');
-        console.log('我被点击了=>', href, a);
-        // if (href === '/') return (location.pathname = 'www.baidu.com');
-        // event.preventDefault();
-      };
-    });
-  }, []);
-
   const onExportMd = () => {
     exportText(`${name}.md`, content);
   };
@@ -105,12 +94,19 @@ const DocMarkdown = (props: IDocMarkdownProps) => {
 
       <div className="flex relative" style={{ height: 'calc(100% - 40px)' }}>
         <div className="flex-1 p-6 markdown-body overflow-y-auto react-mark-down">
-          <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
+          <ReactMarkdown
+            // components={{
+            //   // Use h2s instead of h1s
+            //   h1: 'h3',
+            // }}
+            remarkPlugins={[remarkGfm]}
+            rehypePlugins={[rehypeRaw]}
+          >
             {content}
           </ReactMarkdown>
         </div>
-        <div className="h-full " style={{ width: '250px' }}>
-          <MarkNav className="h-full w-full" source={content} ordered={false} />
+        <div className="h-full " style={{ width: '250px', overflowY: 'auto' }}>
+          <MarkNav source={content} ordered={false} />
         </div>
       </div>
 
