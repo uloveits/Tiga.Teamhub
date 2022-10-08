@@ -1,6 +1,6 @@
 import React from 'react';
 import { Layout, Spin } from 'antd';
-
+import { Footer } from 'antd/lib/layout/layout';
 import './index.less';
 import MySider from '../Sider';
 import MyHeader from '../Header';
@@ -45,7 +45,7 @@ const BaseLayout = (props: IBaseLayoutProps) => {
             <React.Suspense fallback={<Spin delay={200} className="global-spin" />}>{children}</React.Suspense>
           </div>
         </Content>
-        {/* <Footer style={{ textAlign: 'center' }}>Ronds.Dmp.Web ©2020 Created by uloveits</Footer> */}
+        <Footer style={{ textAlign: 'center' }}>皖ICP备19025030号-1 2022 Created by uloveits</Footer>
       </Layout>
     </Layout>
   );
