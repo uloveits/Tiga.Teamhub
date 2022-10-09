@@ -74,7 +74,7 @@
     "rehype-raw": "^6.1.1",
     "remark-gfm": "^3.0.1",
     "ronds-graph-chart-phm": "^1.0.98",
-    "ronds-metadata": "^1.1.36",
+    "ronds-metadata": "^1.1.41",
     "ronds-react-ui": "1.1.10",
     "style-loader": "^2.0.0",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat",

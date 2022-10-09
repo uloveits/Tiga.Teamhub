@@ -6,15 +6,9 @@
 
 import { FormOutlined } from '@ant-design/icons';
 import React from 'react';
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
-import rehypeRaw from 'rehype-raw';
-// import rehypeHighlight from 'rehype-highlight';
-import MarkNav from 'markdown-navbar';
+import { MdView } from 'ronds-metadata';
 import DocApi from '@/api/DocApi';
 import AuthButton from '@/comps/common/AuthButton';
-import 'markdown-navbar/dist/navbar.css';
-import 'github-markdown-css';
 import { exportText } from '@/utils';
 import { message } from 'antd';
 import Copy from 'copy-to-clipboard';
@@ -93,21 +87,7 @@ const DocMarkdown = (props: IDocMarkdownProps) => {
       )}
 
       <div className="flex relative" style={{ height: 'calc(100% - 40px)' }}>
-        <div className="flex-1 p-6 markdown-body overflow-y-auto react-mark-down">
-          <ReactMarkdown
-            // components={{
-            //   // Use h2s instead of h1s
-            //   h1: 'h3',
-            // }}
-            remarkPlugins={[remarkGfm]}
-            rehypePlugins={[rehypeRaw]}
-          >
-            {content}
-          </ReactMarkdown>
-        </div>
-        <div className="h-full " style={{ width: '250px', overflowY: 'auto' }}>
-          <MarkNav source={content} ordered={false} />
-        </div>
+        <MdView source={content} isMarkNav={true} />
       </div>
 
       <AddOrEditDocContentModal
