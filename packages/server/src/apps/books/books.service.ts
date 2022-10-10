@@ -37,10 +37,14 @@ export class BooksService {
     return res;
   }
 
-  async getAllBook() {
+  async getAllBook(body: any) {
     const qb = this.repository.createQueryBuilder('books');
     qb.where({ isDeleted: false });
     qb.orderBy('sort', 'ASC');
+    if (body?.page && body?.size) {
+      qb.skip(body.size * (body.page - 1));
+      qb.take(body.size);
+    }
     return qb.getMany();
   }
 

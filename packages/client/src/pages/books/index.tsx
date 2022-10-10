@@ -15,7 +15,7 @@ const Books = () => {
   const [list, setList] = React.useState<any[]>([]);
 
   const getAllBook = React.useCallback(async () => {
-    const res = await BooksApi.getAllBook();
+    const res = await BooksApi.getAllBook({});
     if (res.successed) {
       console.log(res);
       setList([...res.data]);

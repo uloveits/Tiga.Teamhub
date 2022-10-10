@@ -34,11 +34,12 @@ export default class BooksApi {
    * 获取所有图书
    * @param input
    */
-  static getAllBook() {
+  static getAllBook(data: any) {
     const api = '/api/books/list';
 
     return HttpClient.fetch<any>(api, {
       method: 'post',
+      body: data,
     });
   }
 }

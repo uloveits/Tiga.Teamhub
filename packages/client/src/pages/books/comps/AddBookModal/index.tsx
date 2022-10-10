@@ -131,6 +131,7 @@ const ADD_SCHEMA = [
           },
         ],
       },
+
       {
         id: 'sort',
         type: 'number',

@@ -36,8 +36,8 @@ export class BooksController {
 
   @UseGuards(AuthGuard('jwt'))
   @Post('list')
-  getAllBook() {
-    return this.booksService.getAllBook();
+  getAllBook(@Body() body: any) {
+    return this.booksService.getAllBook(body);
   }
 
   @Get(':id')
