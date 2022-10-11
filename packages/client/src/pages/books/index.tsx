@@ -6,6 +6,7 @@
 
 import BooksApi from '@/api/BooksApi';
 import AuthButton from '@/comps/common/AuthButton';
+import { Input } from 'antd';
 import React from 'react';
 import AddBookModal from './comps/AddBookModal';
 import BookCard from './comps/BookCard';
@@ -28,15 +29,21 @@ const Books = () => {
 
   return (
     <>
-      <div className="pb-2">
-        <AuthButton
-          type="primary"
-          onClick={() => {
-            setIsModal(true);
-          }}
-        >
-          新建
-        </AuthButton>
+      <div className="pb-2 flex items-center">
+        <div className="flex-1">
+          <AuthButton
+            type="primary"
+            onClick={() => {
+              setIsModal(true);
+            }}
+          >
+            新建
+          </AuthButton>
+        </div>
+
+        <div>
+          <Input placeholder="根据名称检索" />
+        </div>
       </div>
       <div style={{ height: 'calc(100% - 40px)' }}>
         <BookCard list={list} />
