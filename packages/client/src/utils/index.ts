@@ -233,3 +233,12 @@ export function fakeClick(obj: any) {
   ev.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
   obj.dispatchEvent(ev);
 }
+
+export function getElementByAttr(tag: string, attr: string, value: string) {
+  const aElements = document.getElementsByTagName(tag);
+  let aEle;
+  for (let i = 0; i < aElements.length; i++) {
+    if (aElements[i].getAttribute(attr) === value) aEle = aElements[i];
+  }
+  return aEle;
+}

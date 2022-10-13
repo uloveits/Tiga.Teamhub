@@ -15957,10 +15957,10 @@ ronds-graph-chart-phm@^1.0.98:
     wave-resampler "^1.0.0"
     wavefile "^11.0.0"
 
-ronds-metadata@^1.1.41:
-  version "1.1.41"
-  resolved "https://registry.yarnpkg.com/ronds-metadata/-/ronds-metadata-1.1.41.tgz#69d809b64aba8f8cbea661788e634d1d5c89756b"
-  integrity sha512-ZGIt+cxR4Nj8Emaxi8mIzkkteQs5GvVC3iIZKzMEAXK6/013nqnsqXljO8XkqkzF2EbHqyTvwQ6Q9+CJj966Iw==
+ronds-metadata@^1.1.47:
+  version "1.1.47"
+  resolved "https://registry.yarnpkg.com/ronds-metadata/-/ronds-metadata-1.1.47.tgz#7f6a7b0a36e77d7ead8a141f650dd54ed2b4478b"
+  integrity sha512-rUasEL+3NigVyQRoL8+7yIRqBjo+U06MQ9g4Qxhzp6ryx1TJEunVcBe1gBAJc+eAU94le77tpfy+BAvCrWyXHw==
   dependencies:
     "@antv/x6" "^1.32.2"
     "@antv/x6-react-shape" "^1.6.0"
