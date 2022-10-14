@@ -9,7 +9,7 @@ import React from 'react';
 import { MdView } from 'ronds-metadata';
 import DocApi from '@/api/DocApi';
 import AuthButton from '@/comps/common/AuthButton';
-import { exportText, getElementByAttr } from '@/utils';
+import { exportText } from '@/utils';
 import { message } from 'antd';
 import Copy from 'copy-to-clipboard';
 import AddOrEditDocContentModal from '../AddOrEditDocContent';
@@ -40,16 +40,6 @@ const DocMarkdown = (props: IDocMarkdownProps) => {
 
   const onExportMd = () => {
     exportText(`${name}.md`, content);
-  };
-
-  const onNavItemClick = (event: any, element: any, hashValue: string) => {
-    console.log('onNavItemClick', event, element, hashValue, window.location);
-    const anchorElement = getElementByAttr('h2', 'data-id', hashValue);
-    console.log(anchorElement);
-
-    if (anchorElement) {
-      anchorElement.scrollIntoView({ block: 'start', behavior: 'smooth' });
-    }
   };
 
   return (
@@ -97,7 +87,7 @@ const DocMarkdown = (props: IDocMarkdownProps) => {
       )}
 
       <div className="flex relative" style={{ height: 'calc(100% - 40px)' }}>
-        <MdView source={content} isMarkNav={true} navOptions={{ onNavItemClick }} />
+        <MdView key={id} source={content} isMarkNav={true} />
       </div>
 
       <AddOrEditDocContentModal
