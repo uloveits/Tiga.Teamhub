@@ -7,7 +7,12 @@
 import React from 'react';
 
 const Home = () => {
-  return <div className="w-full h-full overflow-y-auto">123</div>;
+  return (
+    <div className="w-full h-full overflow-y-auto">
+      <div>文档数量</div>
+      <div>图书数量</div>
+    </div>
+  );
 };
 
 export default Home;

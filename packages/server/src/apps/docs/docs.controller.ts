@@ -38,7 +38,7 @@ export class DocsController {
    * 获取文档目录列表
    * @returns
    */
-  // @UseGuards(AuthGuard('jwt'))
+  @UseGuards(AuthGuard('jwt'))
   @Get('type/:type')
   getAllListByType(@Param('type') type: number) {
     return this.docsService.getAllListByType(type);
@@ -48,10 +48,10 @@ export class DocsController {
    * 获取文档种类列表
    * @returns
    */
-  // @UseGuards(AuthGuard('jwt'))
+  @UseGuards(AuthGuard('jwt'))
   @Get('types')
-  getAllTypeList() {
-    return this.docsService.getAllTypeList();
+  getAllTypeList(@Body() body: any) {
+    return this.docsService.getAllTypeList(body);
   }
 
   /**

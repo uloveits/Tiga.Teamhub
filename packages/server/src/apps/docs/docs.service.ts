@@ -51,10 +51,23 @@ export class DocsService {
    * 获取文档种类列表
    * @returns
    */
-  async getAllTypeList() {
+  async getAllTypeList(body?: any) {
     const qb = this.repository.createQueryBuilder('docs');
     qb.where({ pid: -1, isDeleted: false });
+    // 模糊查询
+    if (body?.filter?.name) {
+      qb.andWhere('books.name LIKE :name', {
+        name: `%${body.filter.name}%`,
+      });
+    }
+
     qb.orderBy('sort', 'ASC');
+
+    if (body?.page && body?.size) {
+      qb.skip(body.size * (body.page - 1));
+      qb.take(body.size);
+    }
+
     return qb.getMany();
   }
 
