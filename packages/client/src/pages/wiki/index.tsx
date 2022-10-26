@@ -5,7 +5,7 @@
  */
 
 import DocApi from '@/api/DocApi';
-import { Button } from 'antd';
+import { Button, Input } from 'antd';
 import React from 'react';
 import AddOrEditDocModal from './comps/AddOrEditDoc';
 import WikiCard from './comps/WikiCard';
@@ -28,15 +28,20 @@ const WikiCenter = () => {
 
   return (
     <>
-      <div className="pb-2">
-        <Button
-          type="primary"
-          onClick={() => {
-            setIsModal(true);
-          }}
-        >
-          新建
-        </Button>
+      <div className="pb-2 flex items-center">
+        <div className="flex-1">
+          <Button
+            type="primary"
+            onClick={() => {
+              setIsModal(true);
+            }}
+          >
+            新建
+          </Button>
+        </div>
+        <div>
+          <Input placeholder="根据名称检索" />
+        </div>
       </div>
       <div style={{ height: 'calc(100% - 40px)' }}>
         <WikiCard list={types} />
