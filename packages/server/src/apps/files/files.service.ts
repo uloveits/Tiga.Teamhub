@@ -22,14 +22,11 @@ export class FilesService {
 
   async upload(file: any, body: any, user: any) {
     console.log('upload', file, body, user);
-    const guid = Guid();
-    const type = file.mimetype.split('/');
-    writeFileSync(`./public/upload/${guid}.${type[1]}`, file.buffer);
     const _file = new File();
     _file.name = body.name;
     _file.creator = user.username;
     _file.host = this.config.get<string>('BASE_URL_IP');
-    _file.path = `/upload/${guid}.${type[1]}`;
+    _file.path = file.path.replace('public', '');
     const res = await this.repository.save(_file);
 
     return res;
