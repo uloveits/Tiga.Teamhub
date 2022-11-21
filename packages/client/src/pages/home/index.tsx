@@ -4,14 +4,19 @@
  * @LastEditTime: 2022-09-16 17:09:14
  */
 
+import { Col, Row, Statistic } from 'antd';
 import React from 'react';
 
 const Home = () => {
   return (
-    <div className="w-full h-full overflow-y-auto">
-      <div>文档数量</div>
-      <div>图书数量</div>
-    </div>
+    <Row gutter={16}>
+      <Col span={12}>
+        <Statistic title="图书数量" value={1128} />
+      </Col>
+      <Col span={12}>
+        <Statistic title="文档数量" value={93} suffix="/ 100" />
+      </Col>
+    </Row>
   );
 };
 
